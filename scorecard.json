@@ -1,0 +1,53 @@
+[
+  {
+    "case_id": "case-1",
+    "order_id_scores": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "revenue_scores": {
+      "pass": true,
+      "pct_off": 0.0
+    },
+    "hallucination_scores": {
+      "hallucinated_ids": [],
+      "pass": true
+    },
+    "severity_match": true
+  },
+  {
+    "case_id": "case-2",
+    "order_id_scores": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "revenue_scores": {
+      "pass": true,
+      "pct_off": 0.0
+    },
+    "hallucination_scores": {
+      "hallucinated_ids": [],
+      "pass": true
+    },
+    "severity_match": true
+  },
+  {
+    "case_id": "case-3",
+    "order_id_scores": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "revenue_scores": {
+      "pass": true,
+      "pct_off": 0.0
+    },
+    "hallucination_scores": {
+      "hallucinated_ids": [],
+      "pass": true
+    },
+    "severity_match": true
+  }
+]

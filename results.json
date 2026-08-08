@@ -1,0 +1,98 @@
+[
+  {
+    "case_id": "case-1",
+    "scenario": "Meridian Electronics has notified us of a 10-day shipment delay on control board assemblies.",
+    "golden_answer": {
+      "affected_orders": [
+        "SO-4001",
+        "SO-4003"
+      ],
+      "severity": "high",
+      "revenue_at_risk_usd": 2630000,
+      "reasoning": "P-1010 is sole-sourced from Meridian. On-hand (120) vs. pooled demand (290) leaves a 170-unit shortfall, and the 35-day lead time means replenishment lands after both due dates."
+    },
+    "model_response": {
+      "affected_orders": [
+        "SO-4001",
+        "SO-4003"
+      ],
+      "severity": "high",
+      "revenue_at_risk_usd": 2630000,
+      "reasoning": "P-1010 (Control board assembly) is single-sourced from Meridian Electronics, and pooled open-order demand totals 290 units (SO-4001: 200, SO-4003: 90) against only 120 units on hand with nothing in transit \u2014 a 170-unit shortfall that exists independently of the 10-day delay. Both orders are high-priority with imminent due dates (Aug 21 and Aug 24), placing $2.63M in revenue at risk."
+    },
+    "model": "claude-sonnet-4-6",
+    "usage": {
+      "input_tokens": 1897,
+      "output_tokens": 777
+    },
+    "timing": {
+      "prompt_build_ms": 0.0,
+      "api_call_ms": 15061.5,
+      "parse_ms": 0.2,
+      "total_ms": 15061.7,
+      "output_tokens_per_sec": 51.6
+    }
+  },
+  {
+    "case_id": "case-2",
+    "scenario": "Nantong Polymer reports a delay affecting production of the polymer seal kit.",
+    "golden_answer": {
+      "affected_orders": [
+        "SO-4005",
+        "SO-4008"
+      ],
+      "severity": "high",
+      "revenue_at_risk_usd": 3700000,
+      "reasoning": "Sole supplier for P-1030. On-hand (60) + in-transit (200) = 260 units vs. 300 units pooled demand -> 40-unit shortfall. Convention: any shortfall flags all orders sharing the part."
+    },
+    "model_response": {
+      "affected_orders": [
+        "SO-4005",
+        "SO-4008"
+      ],
+      "severity": "high",
+      "revenue_at_risk_usd": 3700000,
+      "reasoning": "Nantong Polymer is the sole supplier for P-1030 (Polymer seal kit). Combined open order demand totals 300 units (SO-4005: 180, SO-4008: 120), which exceeds the available supply of 260 units (60 on-hand + 200 in-transit), creating a 40-unit shortfall. Both orders are affected, putting $3.7M in revenue at risk including a high-priority medical customer order."
+    },
+    "model": "claude-sonnet-4-6",
+    "usage": {
+      "input_tokens": 1891,
+      "output_tokens": 697
+    },
+    "timing": {
+      "prompt_build_ms": 0.1,
+      "api_call_ms": 14244.5,
+      "parse_ms": 0.1,
+      "total_ms": 14244.7,
+      "output_tokens_per_sec": 48.9
+    }
+  },
+  {
+    "case_id": "case-3",
+    "scenario": "Aldridge Precision reports a delay affecting production of the precision housing.",
+    "golden_answer": {
+      "affected_orders": [],
+      "severity": "none",
+      "revenue_at_risk_usd": 0,
+      "reasoning": "P-1020 is dual-sourced (Aldridge + Kessler); a single-supplier delay doesn't remove supply. Independently, on-hand (800) alone already exceeds pooled demand (750), so even a full supply-side outage wouldn't create a shortfall."
+    },
+    "model_response": {
+      "affected_orders": [],
+      "severity": "none",
+      "revenue_at_risk_usd": 0,
+      "reasoning": "Aldridge Precision's delay affects P-1020 (Precision housing), but this part is dual-sourced with Kessler Components (SUP-003) remaining fully available. Per policy, a single-supplier disruption on a dual-sourced part does not constitute a shortfall; furthermore, current on-hand (800) plus in-transit (400) inventory already exceeds total pooled demand of 750 units across SO-4004 and SO-4007. No orders are affected."
+    },
+    "model": "claude-sonnet-4-6",
+    "usage": {
+      "input_tokens": 1889,
+      "output_tokens": 519
+    },
+    "timing": {
+      "prompt_build_ms": 0.2,
+      "api_call_ms": 9585.8,
+      "parse_ms": 0.1,
+      "total_ms": 9586.0,
+      "output_tokens_per_sec": 54.1
+    }
+  }
+]

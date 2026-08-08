@@ -1,0 +1,4 @@
+source_file,case_id,model,input_tokens,output_tokens,input_cost_usd,output_cost_usd,total_cost_usd
+results_claude-sonnet-4-6.json,case-1,claude-sonnet-4-6,1897,777,0.00569,0.01166,0.01735
+results_claude-sonnet-4-6.json,case-2,claude-sonnet-4-6,1891,697,0.00567,0.01046,0.01613
+results_claude-sonnet-4-6.json,case-3,claude-sonnet-4-6,1889,519,0.00567,0.00779,0.01345

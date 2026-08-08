@@ -1,0 +1,32 @@
+[
+  {
+    "id": "case-1",
+    "scenario": "Meridian Electronics has notified us of a 10-day shipment delay on control board assemblies.",
+    "golden_answer": {
+      "affected_orders": ["SO-4001", "SO-4003"],
+      "severity": "high",
+      "revenue_at_risk_usd": 2630000,
+      "reasoning": "P-1010 is sole-sourced from Meridian. On-hand (120) vs. pooled demand (290) leaves a 170-unit shortfall, and the 35-day lead time means replenishment lands after both due dates."
+    }
+  },
+  {
+    "id": "case-2",
+    "scenario": "Nantong Polymer reports a delay affecting production of the polymer seal kit.",
+    "golden_answer": {
+      "affected_orders": ["SO-4005", "SO-4008"],
+      "severity": "high",
+      "revenue_at_risk_usd": 3700000,
+      "reasoning": "Sole supplier for P-1030. On-hand (60) + in-transit (200) = 260 units vs. 300 units pooled demand -> 40-unit shortfall. Convention: any shortfall flags all orders sharing the part."
+    }
+  },
+  {
+    "id": "case-3",
+    "scenario": "Aldridge Precision reports a delay affecting production of the precision housing.",
+    "golden_answer": {
+      "affected_orders": [],
+      "severity": "none",
+      "revenue_at_risk_usd": 0,
+      "reasoning": "P-1020 is dual-sourced (Aldridge + Kessler); a single-supplier delay doesn't remove supply. Independently, on-hand (800) alone already exceeds pooled demand (750), so even a full supply-side outage wouldn't create a shortfall."
+    }
+  }
+]

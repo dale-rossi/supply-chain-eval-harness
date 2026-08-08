@@ -1,0 +1,38 @@
+{
+  "suppliers": [
+    { "id": "SUP-001", "name": "Meridian Electronics",  "region": "Shenzhen, CN",   "risk_tier": "medium" },
+    { "id": "SUP-002", "name": "Aldridge Precision",    "region": "Monterrey, MX",  "risk_tier": "low" },
+    { "id": "SUP-003", "name": "Kessler Components",    "region": "Stuttgart, DE",  "risk_tier": "low" },
+    { "id": "SUP-004", "name": "Nantong Polymer",       "region": "Nantong, CN",    "risk_tier": "high" },
+    { "id": "SUP-005", "name": "Corvair Fasteners",     "region": "Ohio, US",       "risk_tier": "low" }
+  ],
+
+  "parts": [
+    { "id": "P-1010", "name": "Control board assembly", "suppliers": ["SUP-001"],            "lead_time_days": 35 },
+    { "id": "P-1020", "name": "Precision housing",      "suppliers": ["SUP-002", "SUP-003"], "lead_time_days": 21 },
+    { "id": "P-1030", "name": "Polymer seal kit",       "suppliers": ["SUP-004"],            "lead_time_days": 28 },
+    { "id": "P-1040", "name": "Fastener set",           "suppliers": ["SUP-005"],            "lead_time_days": 10 },
+    { "id": "P-1050", "name": "Thermal sensor module",  "suppliers": ["SUP-001"],            "lead_time_days": 30 }
+  ],
+
+  "inventory": [
+    { "part_id": "P-1010", "on_hand": 120, "safety_stock": 100, "in_transit": 0,   "in_transit_eta": null },
+    { "part_id": "P-1020", "on_hand": 800, "safety_stock": 250, "in_transit": 400, "in_transit_eta": "2026-08-19" },
+    { "part_id": "P-1030", "on_hand": 60,  "safety_stock": 150, "in_transit": 200, "in_transit_eta": "2026-08-28" },
+    { "part_id": "P-1040", "on_hand": 5000,"safety_stock": 1000,"in_transit": 0,   "in_transit_eta": null },
+    { "part_id": "P-1050", "on_hand": 340, "safety_stock": 200, "in_transit": 0,   "in_transit_eta": null }
+  ],
+
+  "orders": [
+    { "id": "SO-4001", "customer": "Halvorsen Industrial", "part_id": "P-1010", "qty": 200, "due_date": "2026-08-24", "revenue_usd": 1850000, "priority": "high" },
+    { "id": "SO-4002", "customer": "Halvorsen Industrial", "part_id": "P-1050", "qty": 150, "due_date": "2026-09-30", "revenue_usd": 420000,  "priority": "medium" },
+    { "id": "SO-4003", "customer": "Brightline Motors",    "part_id": "P-1010", "qty": 90,  "due_date": "2026-08-21", "revenue_usd": 780000,  "priority": "high" },
+    { "id": "SO-4004", "customer": "Brightline Motors",    "part_id": "P-1020", "qty": 300, "due_date": "2026-08-26", "revenue_usd": 610000,  "priority": "medium" },
+    { "id": "SO-4005", "customer": "Trellis Medical",      "part_id": "P-1030", "qty": 180, "due_date": "2026-09-14", "revenue_usd": 2400000, "priority": "high" },
+    { "id": "SO-4006", "customer": "Trellis Medical",      "part_id": "P-1040", "qty": 900, "due_date": "2026-08-30", "revenue_usd": 95000,   "priority": "low" },
+    { "id": "SO-4007", "customer": "Okonkwo Systems",      "part_id": "P-1020", "qty": 450, "due_date": "2026-09-08", "revenue_usd": 880000,  "priority": "medium" },
+    { "id": "SO-4008", "customer": "Okonkwo Systems",      "part_id": "P-1030", "qty": 120, "due_date": "2026-10-20", "revenue_usd": 1300000, "priority": "medium" }
+  ],
+
+  "as_of_date": "2026-08-03"
+}

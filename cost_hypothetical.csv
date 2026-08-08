@@ -1,0 +1,16 @@
+case_id,model,input_tokens,output_tokens,input_cost_usd,output_cost_usd,total_cost_usd
+case-1,claude-haiku-4-5-20251001,1897,777,0.0019,0.00388,0.00578
+case-1,claude-sonnet-4-6,1897,777,0.00569,0.01166,0.01735
+case-1,claude-sonnet-5,1897,777,0.00379,0.00777,0.01156
+case-1,claude-opus-5,1897,777,0.00949,0.01943,0.02891
+case-1,claude-fable-5,1897,777,0.01897,0.03885,0.05782
+case-2,claude-haiku-4-5-20251001,1891,697,0.00189,0.00349,0.00538
+case-2,claude-sonnet-4-6,1891,697,0.00567,0.01046,0.01613
+case-2,claude-sonnet-5,1891,697,0.00378,0.00697,0.01075
+case-2,claude-opus-5,1891,697,0.00945,0.01742,0.02688
+case-2,claude-fable-5,1891,697,0.01891,0.03485,0.05376
+case-3,claude-haiku-4-5-20251001,1889,519,0.00189,0.0026,0.00448
+case-3,claude-sonnet-4-6,1889,519,0.00567,0.00779,0.01345
+case-3,claude-sonnet-5,1889,519,0.00378,0.00519,0.00897
+case-3,claude-opus-5,1889,519,0.00945,0.01298,0.02242
+case-3,claude-fable-5,1889,519,0.01889,0.02595,0.04484
