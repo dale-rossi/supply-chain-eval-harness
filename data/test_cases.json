@@ -21,12 +21,22 @@
   },
   {
     "id": "case-3",
-    "scenario": "Aldridge Precision reports a delay affecting production of the precision housing.",
+    "scenario": "Corvair Fasteners reports a delay affecting production of the fastener set.",
     "golden_answer": {
       "affected_orders": [],
       "severity": "none",
       "revenue_at_risk_usd": 0,
-      "reasoning": "P-1020 is dual-sourced (Aldridge + Kessler); a single-supplier delay doesn't remove supply. Independently, on-hand (800) alone already exceeds pooled demand (750), so even a full supply-side outage wouldn't create a shortfall."
+      "reasoning": "P-1040 is sole-sourced from Corvair, but on-hand (5000) dwarfs pooled demand (900, all from SO-4006), so the delay creates no shortfall. Negative control: a supplier delay is not itself a shortfall when inventory already covers demand."
+    }
+  },
+  {
+    "id": "case-4",
+    "scenario": "Kessler Components reports a delay affecting production of the precision housing.",
+    "golden_answer": {
+      "affected_orders": ["SO-4004", "SO-4007", "SO-4009"],
+      "severity": "medium",
+      "revenue_at_risk_usd": 2490000,
+      "reasoning": "P-1020 pooled demand (300 + 450 + 500 = 1250) exceeds available supply (800 on-hand + 400 in-transit = 1200), a 50-unit shortfall that flags all three orders. Kessler is disrupted and so is excluded, but Aldridge's 21-day lead time puts a PO placed 2026-08-03 at 2026-08-24, inside the earliest affected due date of 2026-08-26 -- exactly one supplier in time, so medium."
     }
   }
 ]

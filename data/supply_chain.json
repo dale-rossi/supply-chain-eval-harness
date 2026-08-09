@@ -42,7 +42,8 @@
     { "id": "SO-4005", "customer": "Trellis Medical",      "part_id": "P-1030", "qty": 180, "due_date": "2026-09-14", "revenue_usd": 2400000, "priority": "high" },
     { "id": "SO-4006", "customer": "Trellis Medical",      "part_id": "P-1040", "qty": 900, "due_date": "2026-08-30", "revenue_usd": 95000,   "priority": "low" },
     { "id": "SO-4007", "customer": "Okonkwo Systems",      "part_id": "P-1020", "qty": 450, "due_date": "2026-09-08", "revenue_usd": 880000,  "priority": "medium" },
-    { "id": "SO-4008", "customer": "Okonkwo Systems",      "part_id": "P-1030", "qty": 120, "due_date": "2026-10-20", "revenue_usd": 1300000, "priority": "medium" }
+    { "id": "SO-4008", "customer": "Okonkwo Systems",      "part_id": "P-1030", "qty": 120, "due_date": "2026-10-20", "revenue_usd": 1300000, "priority": "medium" },
+    { "id": "SO-4009", "customer": "Trellis Medical",      "part_id": "P-1020", "qty": 500, "due_date": "2026-09-21", "revenue_usd": 1000000, "priority": "medium" }
   ],
 
   "as_of_date": "2026-08-03"

@@ -73,10 +73,19 @@ These are judgment calls baked into the golden answers, not derivable from the d
 
 - **Affected order** = pooled demand for the part across *all* open orders exceeds
   `on_hand + in_transit`. Any shortfall flags every order sharing that part.
-- **Dual sourcing is not a shortfall.** Case 3 is a deliberate negative test: a delay at one of
-  P-1020's two suppliers should yield an empty `affected_orders`. It exists to catch
-  pattern-matching ("supplier delay" → "orders affected") rather than actual reasoning. Don't
-  "fix" a model failure there by loosening the grader.
+- **A supplier delay is not itself a shortfall.** Case 3 is the negative control: a delay at
+  Corvair, P-1040's sole supplier, must still yield an empty `affected_orders`, because 5000
+  on-hand dwarfs the 900 pooled demand. It exists to catch pattern-matching ("supplier delay" →
+  "orders affected") rather than actual reasoning. Don't "fix" a model failure there by loosening
+  the grader. The dual-sourcing rule — one supplier's delay never removes the other's capacity —
+  is exercised by case 4 instead, where it decides `medium` vs `high` rather than whether a
+  shortfall exists at all.
+- **Case 3 moved from P-1020 to P-1040 when SO-4009 was added.** It was previously a dual-sourcing
+  negative test on the precision housing, and it held only because P-1020 pooled demand (750) sat
+  under available supply (1200). SO-4009 adds 500 units, taking pooled demand to 1250 and putting
+  P-1020 short by 50 — which would have flipped case 3 to three affected orders at `high` and
+  silently destroyed the harness's only negative control. Keep the negative control on a part with
+  a large deliberate surplus; P-1040 has 4100 units of headroom.
 - **Revenue tolerance** is 5%, except a golden of 0 requires exact 0 (no dividing by zero); that
   branch returns `pct_off: None` to mean undefined.
 - **Hallucination** means citing an order ID absent from `supply_chain.json` entirely — distinct
@@ -102,8 +111,10 @@ These are judgment calls baked into the golden answers, not derivable from the d
   is what puts cases 1 and 2 on `high` in agreement with their goldens — case 2 lands there
   despite SUP-004's 28-day lead time nominally beating the 2026-09-14 deadline. Reaching `medium`
   or `low` requires a multi-sourced part with a real shortfall: one healthy in-time supplier for
-  `medium`, two for `low`. No current fixture reaches either, since P-1020 is the only
-  multi-sourced part and carries 450 units of surplus.
+  `medium`, two for `low`. Case 4 is that `medium` fixture, and it is deliberately tight —
+  Aldridge clears the 2026-08-26 deadline by two days, so moving SO-4004's due date earlier, or
+  disrupting Aldridge instead of Kessler, flips it to `high`. `low` is still unreachable: it needs
+  a third supplier on some part, or a shortfall with no supplier disrupted at all.
 
-`data/supply_chain.json` is small on purpose (5 suppliers, 5 parts, 8 orders) so answers stay
+`data/supply_chain.json` is small on purpose (5 suppliers, 5 parts, 9 orders) so answers stay
 hand-derivable. New test cases need their golden answer worked out by hand against that data.
