@@ -8,11 +8,22 @@
   ],
 
   "parts": [
-    { "id": "P-1010", "name": "Control board assembly", "suppliers": ["SUP-001"],            "lead_time_days": 35 },
-    { "id": "P-1020", "name": "Precision housing",      "suppliers": ["SUP-002", "SUP-003"], "lead_time_days": 21 },
-    { "id": "P-1030", "name": "Polymer seal kit",       "suppliers": ["SUP-004"],            "lead_time_days": 28 },
-    { "id": "P-1040", "name": "Fastener set",           "suppliers": ["SUP-005"],            "lead_time_days": 10 },
-    { "id": "P-1050", "name": "Thermal sensor module",  "suppliers": ["SUP-001"],            "lead_time_days": 30 }
+    { "id": "P-1010", "name": "Control board assembly", "suppliers": [
+      { "supplier_id": "SUP-001", "lead_time_days": 35 }
+    ] },
+    { "id": "P-1020", "name": "Precision housing",      "suppliers": [
+      { "supplier_id": "SUP-002", "lead_time_days": 21 },
+      { "supplier_id": "SUP-003", "lead_time_days": 35 }
+    ] },
+    { "id": "P-1030", "name": "Polymer seal kit",       "suppliers": [
+      { "supplier_id": "SUP-004", "lead_time_days": 28 }
+    ] },
+    { "id": "P-1040", "name": "Fastener set",           "suppliers": [
+      { "supplier_id": "SUP-005", "lead_time_days": 10 }
+    ] },
+    { "id": "P-1050", "name": "Thermal sensor module",  "suppliers": [
+      { "supplier_id": "SUP-001", "lead_time_days": 30 }
+    ] }
   ],
 
   "inventory": [
