@@ -85,10 +85,25 @@ These are judgment calls baked into the golden answers, not derivable from the d
   guards). That's what lets case 3 earn a perfect score for correctly predicting nothing, but it
   also means an empty prediction against a non-empty golden gets a vacuous `precision: 1.0`. F1 is
   the trustworthy column; don't read precision in isolation.
-- **`severity` has no rubric.** `SYSTEM_PROMPT` lists the enum (`none`/`low`/`medium`/`high`) but
-  never says how to choose among them, and `graders.py` scores it as an exact string match. The
-  golden answers only ever use `none` and `high`, so `low`/`medium` are currently unreachable
-  without a guess. Defining the bands is open work, not an oversight to silently patch.
+- **`severity` counts suppliers that can beat the deadline.** `graders.py` scores it as an exact
+  string match against these bands, which `SYSTEM_PROMPT` states verbatim: `none` = available
+  supply (`on_hand + in_transit`) meets pooled demand, so no shortfall; otherwise count the
+  disrupted part's suppliers that could replenish before the *earliest* due date among the
+  affected orders — zero → `high`, exactly one → `medium`, two or more → `low`. A supplier
+  qualifies if a PO placed on `as_of_date` using **that supplier's own** `lead_time_days` lands on
+  or before that date, which is why lead time is per supplier-part in `supply_chain.json`.
+  The rubric rests on three stated assumptions, all of which are simplifications: supplier
+  capacity is unbounded (one in-time supplier covers the entire shortfall), customer tier and
+  order priority are out of scope, and **the disrupted supplier never qualifies** — a new PO
+  queues behind the shipment already delayed, so it is excluded from the count no matter how short
+  its nominal lead time. Undisrupted suppliers are counted normally, at their own lead times.
+- **A shortfall on a sole-sourced part is therefore always `high`.** Excluding the disrupted
+  supplier drops the count to zero whenever the only supplier is the one that was disrupted, which
+  is what puts cases 1 and 2 on `high` in agreement with their goldens — case 2 lands there
+  despite SUP-004's 28-day lead time nominally beating the 2026-09-14 deadline. Reaching `medium`
+  or `low` requires a multi-sourced part with a real shortfall: one healthy in-time supplier for
+  `medium`, two for `low`. No current fixture reaches either, since P-1020 is the only
+  multi-sourced part and carries 450 units of surplus.
 
 `data/supply_chain.json` is small on purpose (5 suppliers, 5 parts, 8 orders) so answers stay
 hand-derivable. New test cases need their golden answer worked out by hand against that data.

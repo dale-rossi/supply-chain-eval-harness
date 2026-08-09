@@ -53,6 +53,26 @@ available supply (on_hand + in_transit), given the disruption described. If a pa
 one supplier and the disruption affects only one of them, treat the other supplier's capacity as
 still fully available -- a single-supplier delay on a dual-sourced part is not itself a shortfall.
 
+Then assign severity by counting how many of the disrupted part's suppliers could replenish it
+before the earliest due date among the affected orders:
+
+  none   -- available supply (on_hand + in_transit) >= pooled demand; there is no shortfall
+  high   -- shortfall, and zero suppliers can deliver in time
+  medium -- shortfall, and exactly one supplier can deliver in time
+  low    -- shortfall, and two or more suppliers can deliver in time
+
+A supplier counts as able to deliver in time if a purchase order placed on the dataset's
+as_of_date, using THAT supplier's own lead_time_days, arrives on or before the earliest affected
+due date. Each supplier of a part carries its own lead time, so an alternate supplier may be
+slower or faster than the disrupted one -- judge an alternate by its own lead time, never by the
+disrupted supplier's.
+
+Assume the following: supplier capacity is unbounded, so any supplier that can deliver in time can
+cover the whole shortfall; customer tier and order priority do not affect severity; and a supplier
+named as disrupted never counts as able to deliver in time, because a newly placed purchase order
+queues behind the shipment that is already delayed. Suppliers that are not disrupted count
+normally, at their own lead times.
+
 Work through your reasoning first if you find that helpful, then finish your response with a
 JSON object in exactly this shape, on its own line, with no text after it:
 {
