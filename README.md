@@ -1,17 +1,18 @@
 # Supply Chain Eval Harness — Phase 1
 
 A minimal eval harness against the Claude API, testing a supply-chain risk-analysis prompt
-against three hand-derived golden answers.
+against five hand-derived golden answers.
 
 ## Structure
 
 ```
 harness/
   data/
-    supply_chain.json   # mock dataset: 5 suppliers, 5 parts, 8 orders
-    test_cases.json      # 3 scenarios with golden answers
+    supply_chain.json   # mock dataset: 5 suppliers, 5 parts, 9 orders
+    test_cases.json      # 5 scenarios with golden answers
   runner.py               # loop: build prompt -> call API -> store response
-  graders.py              # order-ID precision/recall, revenue tolerance, hallucination check
+  graders.py              # order-ID precision/recall, revenue tolerance, severity band,
+                          #   hallucination check
   report.py                # tallies grader scores into a scorecard
 ```
 
@@ -83,8 +84,8 @@ runner.py && python report.py` instead of a notebook run-all.
 
 ## Next steps (Phase 1 remainder)
 
-- [ ] Run `runner.py` against all 3 cases, eyeball `results.json` for parse failures or
+- [ ] Run `runner.py` against all 5 cases, eyeball `results.json` for parse failures or
       reasoning that gets the right answer for the wrong reason
 - [ ] Add a model-based grader (Claude scoring the `reasoning` field against a rubric) for the
       cases where "correct" isn't just a set match
-- [ ] Expand to ~20 cases once the 3-case loop is solid
+- [ ] Expand to ~20 cases once the 5-case loop is solid

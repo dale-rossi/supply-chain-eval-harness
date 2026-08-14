@@ -134,7 +134,8 @@ def main():
     hypothetical = build_hypothetical_table()
     if not hypothetical.empty:
         print(hypothetical.to_string(index=False))
-        print("\nTotal hypothetical cost per model, all 3 cases:")
+        n_cases = hypothetical["case_id"].nunique()
+        print(f"\nTotal hypothetical cost per model, all {n_cases} cases:")
         print(hypothetical.groupby("model")["total_cost_usd"].sum().sort_values().to_string())
         hypothetical.to_csv("cost_hypothetical.csv", index=False)
         print("\nSaved cost_hypothetical.csv")
