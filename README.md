@@ -275,5 +275,6 @@ case 6 currently duplicates case 5's scope-discipline test rather than adding co
 
 ## License
 
-No license is currently specified. All rights reserved by the repository owner until one is
-added.
+[MIT](LICENSE). The fabricated dataset in `data/` is covered by the same license — reuse it
+freely, but see the note at the top: it is invented test data, not a description of any real
+supply chain.
