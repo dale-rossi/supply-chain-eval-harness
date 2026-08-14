@@ -38,5 +38,15 @@
       "revenue_at_risk_usd": 2490000,
       "reasoning": "P-1020 pooled demand (300 + 450 + 500 = 1250) exceeds available supply (800 on-hand + 400 in-transit = 1200), a 50-unit shortfall that flags all three orders. Kessler is disrupted and so is excluded, but Aldridge's 21-day lead time puts a PO placed 2026-08-03 at 2026-08-24, inside the earliest affected due date of 2026-08-26 -- exactly one supplier in time, so medium."
     }
+  },
+  {
+    "id": "case-5",
+    "scenario": "Meridian Electronics reports a production delay on the thermal sensor module.",
+    "golden_answer": {
+      "affected_orders": [],
+      "severity": "none",
+      "revenue_at_risk_usd": 0,
+      "reasoning": "P-1050 available supply is on-hand (340) + in-transit (0) = 340 against pooled demand of 150 (SO-4002 alone), so Meridian's delay creates no shortfall. Adversarial control: the rubric does not deduct safety_stock (200) -- protecting it would show 140 available, a false 10-unit shortfall, and excluding the disrupted sole supplier would then wrongly give high / SO-4002 / 420000."
+    }
   }
 ]
