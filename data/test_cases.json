@@ -58,5 +58,15 @@
       "revenue_at_risk_usd": 0,
       "reasoning": "P-1060 available supply is on-hand (400) + in-transit (0) = 400 against pooled demand of 150 (SO-4010 alone), so the delay creates no shortfall. Isolated safety-stock control: Ferreira supplies only P-1060, so no other part can be mistaken for it, and deducting safety_stock (300) would leave 100 available, a false 50-unit shortfall, and wrongly give high / SO-4010 / 540000."
     }
+  },
+  {
+    "id": "case-7",
+    "scenario": "Vasquez Actuation reports a production delay on the servo actuator.",
+    "golden_answer": {
+      "affected_orders": ["SO-4011"],
+      "severity": "low",
+      "revenue_at_risk_usd": 720000,
+      "reasoning": "P-1070 available supply is on-hand (200) + in-transit (0) = 200 against SO-4011's demand of 300, a 100-unit shortfall. Vasquez is disrupted and excluded, but two healthy suppliers beat the 2026-09-01 due date from as_of 2026-08-03 -- Nordvik at 14 days (2026-08-17) and Aldridge at 21 days (2026-08-24) -- so two or more suppliers can deliver in time, which is low. The only `low` fixture in the suite; Vasquez's own 30-day lead time would miss the date anyway, so the band does not depend on the exclusion rule."
+    }
   }
 ]

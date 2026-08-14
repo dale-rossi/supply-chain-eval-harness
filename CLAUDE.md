@@ -18,7 +18,7 @@ There is no test suite, linter, or build step. Everything runs through the local
 source venv/bin/activate
 export ANTHROPIC_API_KEY=sk-ant-...
 
-python runner.py                              # 6 cases x 5 runs = 30 API calls -> results.json
+python runner.py                              # 7 cases x 5 runs = 35 API calls -> results.json
 python report.py                              # grades results.json -> scorecard.json + table
 python cost_analysis.py                       # -> cost_actual.csv, cost_hypothetical.csv
 
@@ -26,7 +26,7 @@ HARNESS_MODEL=claude-haiku-4-5-20251001 python runner.py   # run a different mod
 HARNESS_RUNS_PER_CASE=1 python runner.py                   # single run per case (fast/cheap)
 ```
 
-A full sweep of both models at 5 runs each is 60 calls, about $0.67 and ~12 minutes. Drop
+A full sweep of both models at 5 runs each is 70 calls, roughly $0.80 and ~14 minutes. Drop
 `HARNESS_RUNS_PER_CASE` to 1 while iterating on a prompt or fixture.
 
 Every script uses relative paths (`data/`, `results*.json`) — **run them from the repo root**, not
@@ -109,11 +109,16 @@ These are judgment calls baked into the golden answers, not derivable from the d
   after SO-4010's 2026-08-20 due date, so a model that also forgets the disrupted-supplier
   exclusion still reaches `high` rather than `medium`. Don't "fix" a failure here by teaching
   `SYSTEM_PROMPT` about `safety_stock`; that deletes the fixture.
-- **Case 6, not case 5, is the isolated safety-stock test.** Case 5 was built for that job, but
-  Meridian supplies both P-1010 and P-1050, and Haiku failed it by answering about P-1010 and
-  reproducing case-1's answer verbatim — never reaching the safety-stock step. Both traps are still
-  live in case 5, so a failure there needs its `reasoning` read to tell which one fired. SUP-006
-  supplies only P-1060, which is what makes case 6 unambiguous; keep it that way.
+- **Case 6's safety-stock trap has never fired, so in practice it tests scope discipline.** It was
+  built as the isolated safety-stock control — SUP-006 supplies only P-1060, so the arithmetic is
+  unambiguous — but across 10 sampled runs (5 Sonnet + 5 Haiku) *no run has ever deducted
+  `safety_stock`*, and none has even mentioned it. Both models just apply `on_hand + in_transit` as
+  `SYSTEM_PROMPT` states. Its single failure to date was Haiku ignoring the named part and auditing
+  the whole dataset instead (7 orders, $8.82M), which is the same failure mode as case 5. Treat that
+  as a real negative result, not a broken fixture: the question "do these models protect safety
+  stock?" has been answered no, repeatedly. Keep it as a cheap regression guard for weaker or future
+  models, but don't count it as safety-stock coverage, and note it duplicates case 5's scope test —
+  3 of 7 goldens are now `none`.
 - **Revenue tolerance** is 5%, except a golden of 0 requires exact 0 (no dividing by zero); that
   branch returns `pct_off: None` to mean undefined.
 - **Hallucination** means citing an order ID absent from `supply_chain.json` entirely — distinct
@@ -147,10 +152,30 @@ These are judgment calls baked into the golden answers, not derivable from the d
   or `low` requires a multi-sourced part with a real shortfall: one healthy in-time supplier for
   `medium`, two for `low`. Case 4 is that `medium` fixture, and it is deliberately tight —
   Aldridge clears the 2026-08-26 deadline by two days, so moving SO-4004's due date earlier, or
-  disrupting Aldridge instead of Kessler, flips it to `high`. `low` is still unreachable: it needs
-  a third supplier on some part, or a shortfall with no supplier disrupted at all.
+  disrupting Aldridge instead of Kessler, flips it to `high`. Case 7 is the `low` fixture: P-1070
+  is three-sourced, Vasquez is disrupted, and both Nordvik (14d) and Aldridge (21d) beat the
+  2026-09-01 due date. All four bands now have coverage.
+- **`SYSTEM_PROMPT`'s dual-sourcing sentence contradicts the affected-order rule on case 4.** The
+  prompt says an order is affected when pooled demand exceeds `on_hand + in_transit`, then adds that
+  "a single-supplier delay on a dual-sourced part is not itself a shortfall." Case 4 is the one
+  fixture where both clauses apply at once, and the second reads as an override: on 2 of 5 runs
+  Sonnet computed the 50-unit shortfall correctly, then discarded it — *"the rules require treating
+  the alternate supplier's capacity as fully available … so no supply shortfall exists"* — and
+  returned `none` / `[]` / `0`. The intended meaning is narrower: the delay alone never *creates* a
+  shortfall, but it also never *erases* an inventory one. This is a prompt defect, not a model
+  error, and it is the likeliest reason case 4 is the least stable fixture for both models. Fixing
+  it means rewording the sentence, which invalidates every recorded result, so it is deliberately
+  left alone for now. Don't "fix" case 4 by editing the golden.
+- **Don't reach `low` by adding a third supplier to P-1020.** Case 4 disrupts Kessler there and
+  Aldridge already arrives 2026-08-24 against a 2026-08-26 deadline, so any third supplier with a
+  lead time of **23 days or less** makes the count 2 and silently flips case 4's golden from
+  `medium` to `low`. That is why case 7 lives on its own part with its own exclusive disrupted
+  supplier — the same lesson as case 3 and SO-4009. Case 7 is also deliberately insensitive to two
+  other rules, so a failure there isolates band-counting: Vasquez's own 30-day lead time misses
+  2026-09-01 anyway (so the count is 2 whether or not the exclusion rule is applied), and P-1070 is
+  already short by 100 units before any `safety_stock` deduction.
 
-`data/supply_chain.json` is small on purpose (6 suppliers, 6 parts, 10 orders) so answers stay
+`data/supply_chain.json` is small on purpose (8 suppliers, 7 parts, 11 orders) so answers stay
 hand-derivable. New test cases need their golden answer worked out by hand against that data.
 
 ## Comments

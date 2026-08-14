@@ -5,7 +5,9 @@
     { "id": "SUP-003", "name": "Kessler Components",    "region": "Stuttgart, DE",  "risk_tier": "low" },
     { "id": "SUP-004", "name": "Nantong Polymer",       "region": "Nantong, CN",    "risk_tier": "high" },
     { "id": "SUP-005", "name": "Corvair Fasteners",     "region": "Ohio, US",       "risk_tier": "low" },
-    { "id": "SUP-006", "name": "Ferreira Hydraulics",   "region": "Porto, PT",      "risk_tier": "medium" }
+    { "id": "SUP-006", "name": "Ferreira Hydraulics",   "region": "Porto, PT",      "risk_tier": "medium" },
+    { "id": "SUP-007", "name": "Vasquez Actuation",     "region": "Bilbao, ES",     "risk_tier": "medium" },
+    { "id": "SUP-008", "name": "Nordvik Drives",        "region": "Trondheim, NO",  "risk_tier": "low" }
   ],
 
   "parts": [
@@ -27,6 +29,11 @@
     ] },
     { "id": "P-1060", "name": "Hydraulic manifold",     "suppliers": [
       { "supplier_id": "SUP-006", "lead_time_days": 24 }
+    ] },
+    { "id": "P-1070", "name": "Servo actuator",         "suppliers": [
+      { "supplier_id": "SUP-007", "lead_time_days": 30 },
+      { "supplier_id": "SUP-002", "lead_time_days": 21 },
+      { "supplier_id": "SUP-008", "lead_time_days": 14 }
     ] }
   ],
 
@@ -36,7 +43,8 @@
     { "part_id": "P-1030", "on_hand": 60,  "safety_stock": 150, "in_transit": 200, "in_transit_eta": "2026-08-28" },
     { "part_id": "P-1040", "on_hand": 5000,"safety_stock": 1000,"in_transit": 0,   "in_transit_eta": null },
     { "part_id": "P-1050", "on_hand": 340, "safety_stock": 200, "in_transit": 0,   "in_transit_eta": null },
-    { "part_id": "P-1060", "on_hand": 400, "safety_stock": 300, "in_transit": 0,   "in_transit_eta": null }
+    { "part_id": "P-1060", "on_hand": 400, "safety_stock": 300, "in_transit": 0,   "in_transit_eta": null },
+    { "part_id": "P-1070", "on_hand": 200, "safety_stock": 50,  "in_transit": 0,   "in_transit_eta": null }
   ],
 
   "orders": [
@@ -49,7 +57,8 @@
     { "id": "SO-4007", "customer": "Okonkwo Systems",      "part_id": "P-1020", "qty": 450, "due_date": "2026-09-08", "revenue_usd": 880000,  "priority": "medium" },
     { "id": "SO-4008", "customer": "Okonkwo Systems",      "part_id": "P-1030", "qty": 120, "due_date": "2026-10-20", "revenue_usd": 1300000, "priority": "medium" },
     { "id": "SO-4009", "customer": "Trellis Medical",      "part_id": "P-1020", "qty": 500, "due_date": "2026-09-21", "revenue_usd": 1000000, "priority": "medium" },
-    { "id": "SO-4010", "customer": "Brightline Motors",    "part_id": "P-1060", "qty": 150, "due_date": "2026-08-20", "revenue_usd": 540000,  "priority": "medium" }
+    { "id": "SO-4010", "customer": "Brightline Motors",    "part_id": "P-1060", "qty": 150, "due_date": "2026-08-20", "revenue_usd": 540000,  "priority": "medium" },
+    { "id": "SO-4011", "customer": "Okonkwo Systems",      "part_id": "P-1070", "qty": 300, "due_date": "2026-09-01", "revenue_usd": 720000,  "priority": "high" }
   ],
 
   "as_of_date": "2026-08-03"
