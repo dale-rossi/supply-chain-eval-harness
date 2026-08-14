@@ -13,7 +13,9 @@ def grade_order_ids(golden_ids, predicted_ids):
  
     precision = tp / (tp + fp) if (tp + fp) else 1.0
     recall = tp / (tp + fn) if (tp + fn) else 1.0
-    f1 = 2 * precision * recall / (precision + recall) if (precision + recall) else 1.0
+    # Fallback is 0.0, not 1.0: the sum is only ever 0 when tp == 0 against a
+    # non-empty golden, i.e. a total miss. Two empty sets already give 1.0 here.
+    f1 = 2 * precision * recall / (precision + recall) if (precision + recall) else 0.0
 
     return {
         "precision": round(precision, 2),
