@@ -86,6 +86,20 @@ These are judgment calls baked into the golden answers, not derivable from the d
   P-1020 short by 50 — which would have flipped case 3 to three affected orders at `high` and
   silently destroyed the harness's only negative control. Keep the negative control on a part with
   a large deliberate surplus; P-1040 has 4100 units of headroom.
+- **`safety_stock` is never deducted.** Available supply is `on_hand + in_transit`, full stop —
+  `SYSTEM_PROMPT` defines it that way and never mentions `safety_stock`, even though the field sits
+  in plain view in `supply_chain.json`. Case 6 is the control: P-1060 holds 400 on hand against 150
+  pooled demand, so the golden is `none`, but a model that protects the 300-unit safety stock sees
+  100 available, invents a 50-unit shortfall and returns `high` / `SO-4010` / `540000`. The failure
+  signature is single-valued on purpose — SUP-006's 24-day lead time lands a PO on 2026-08-27,
+  after SO-4010's 2026-08-20 due date, so a model that also forgets the disrupted-supplier
+  exclusion still reaches `high` rather than `medium`. Don't "fix" a failure here by teaching
+  `SYSTEM_PROMPT` about `safety_stock`; that deletes the fixture.
+- **Case 6, not case 5, is the isolated safety-stock test.** Case 5 was built for that job, but
+  Meridian supplies both P-1010 and P-1050, and Haiku failed it by answering about P-1010 and
+  reproducing case-1's answer verbatim — never reaching the safety-stock step. Both traps are still
+  live in case 5, so a failure there needs its `reasoning` read to tell which one fired. SUP-006
+  supplies only P-1060, which is what makes case 6 unambiguous; keep it that way.
 - **Revenue tolerance** is 5%, except a golden of 0 requires exact 0 (no dividing by zero); that
   branch returns `pct_off: None` to mean undefined.
 - **Hallucination** means citing an order ID absent from `supply_chain.json` entirely — distinct
@@ -122,7 +136,7 @@ These are judgment calls baked into the golden answers, not derivable from the d
   disrupting Aldridge instead of Kessler, flips it to `high`. `low` is still unreachable: it needs
   a third supplier on some part, or a shortfall with no supplier disrupted at all.
 
-`data/supply_chain.json` is small on purpose (5 suppliers, 5 parts, 9 orders) so answers stay
+`data/supply_chain.json` is small on purpose (6 suppliers, 6 parts, 10 orders) so answers stay
 hand-derivable. New test cases need their golden answer worked out by hand against that data.
 
 ## Comments

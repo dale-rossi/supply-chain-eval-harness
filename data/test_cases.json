@@ -46,7 +46,17 @@
       "affected_orders": [],
       "severity": "none",
       "revenue_at_risk_usd": 0,
-      "reasoning": "P-1050 available supply is on-hand (340) + in-transit (0) = 340 against pooled demand of 150 (SO-4002 alone), so Meridian's delay creates no shortfall. Adversarial control: the rubric does not deduct safety_stock (200) -- protecting it would show 140 available, a false 10-unit shortfall, and excluding the disrupted sole supplier would then wrongly give high / SO-4002 / 420000."
+      "reasoning": "P-1050 available supply is on-hand (340) + in-transit (0) = 340 against pooled demand of 150 (SO-4002 alone), so Meridian's delay creates no shortfall. Two traps overlap here: Meridian also supplies P-1010, so answering about the wrong part reproduces case-1's answer, and deducting safety_stock (200) would show 140 available and a false 10-unit shortfall. Part scoping is the failure actually observed here; case 6 isolates the safety-stock trap on a supplier that has only one part."
+    }
+  },
+  {
+    "id": "case-6",
+    "scenario": "Ferreira Hydraulics reports a production delay on the hydraulic manifold.",
+    "golden_answer": {
+      "affected_orders": [],
+      "severity": "none",
+      "revenue_at_risk_usd": 0,
+      "reasoning": "P-1060 available supply is on-hand (400) + in-transit (0) = 400 against pooled demand of 150 (SO-4010 alone), so the delay creates no shortfall. Isolated safety-stock control: Ferreira supplies only P-1060, so no other part can be mistaken for it, and deducting safety_stock (300) would leave 100 available, a false 50-unit shortfall, and wrongly give high / SO-4010 / 540000."
     }
   }
 ]

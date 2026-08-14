@@ -18,19 +18,19 @@
       ],
       "severity": "high",
       "revenue_at_risk_usd": 2630000,
-      "reasoning": "P-1010 has pooled demand of 290 units across two open orders but only 120 units available. The sole supplier (Meridian Electronics) is disrupted with a 10-day delay, making it impossible to fulfill either order by the earliest due date (2026-08-21). Zero alternative suppliers can replenish in time."
+      "reasoning": "Pooled demand for P-1010 (290 units) exceeds available supply (120 units), creating a 170-unit shortfall. P-1010 has only one supplier (SUP-001, disrupted with 10-day delay), which cannot deliver by the earliest due date of 2026-08-21. Zero alternate suppliers are available."
     },
     "model": "claude-haiku-4-5-20251001",
     "usage": {
-      "input_tokens": 2347,
-      "output_tokens": 585
+      "input_tokens": 2608,
+      "output_tokens": 613
     },
     "timing": {
       "prompt_build_ms": 0.0,
-      "api_call_ms": 6562.4,
-      "parse_ms": 0.2,
-      "total_ms": 6562.6,
-      "output_tokens_per_sec": 89.1
+      "api_call_ms": 5444.0,
+      "parse_ms": 0.1,
+      "total_ms": 5444.1,
+      "output_tokens_per_sec": 112.6
     }
   },
   {
@@ -52,19 +52,19 @@
       ],
       "severity": "high",
       "revenue_at_risk_usd": 3700000,
-      "reasoning": "Pooled demand for P-1030 (300 units) exceeds available supply (260 units), creating a 40-unit shortfall. The part has only one supplier (SUP-004, Nantong Polymer), which is disrupted and cannot deliver in time, leaving zero alternative suppliers to cover the shortfall before the earliest due date of 2026-09-14."
+      "reasoning": "Pooled demand for P-1030 (300 units) exceeds available supply (260 units), creating a 40-unit shortfall. P-1030 has only one supplier (SUP-004), which is disrupted and cannot deliver additional inventory in time for the earliest due date of 2026-09-14. Zero alternate suppliers are available."
     },
     "model": "claude-haiku-4-5-20251001",
     "usage": {
-      "input_tokens": 2341,
-      "output_tokens": 628
+      "input_tokens": 2602,
+      "output_tokens": 553
     },
     "timing": {
       "prompt_build_ms": 0.1,
-      "api_call_ms": 5670.5,
+      "api_call_ms": 5673.7,
       "parse_ms": 0.1,
-      "total_ms": 5670.7,
-      "output_tokens_per_sec": 110.7
+      "total_ms": 5673.8,
+      "output_tokens_per_sec": 97.5
     }
   },
   {
@@ -80,19 +80,19 @@
       "affected_orders": [],
       "severity": "none",
       "revenue_at_risk_usd": 0,
-      "reasoning": "Corvair Fasteners supplies only P-1040 (Fastener set), which has 5,000 units on hand against total demand of 900 units. Available supply exceeds pooled demand, so no orders are disrupted despite the supplier delay."
+      "reasoning": "P-1040 has 5,000 units on-hand against a pooled demand of only 900 units (SO-4006). Available supply exceeds demand by 4,100 units, so the Corvair Fasteners production delay does not create a shortfall."
     },
     "model": "claude-haiku-4-5-20251001",
     "usage": {
-      "input_tokens": 2341,
-      "output_tokens": 448
+      "input_tokens": 2602,
+      "output_tokens": 433
     },
     "timing": {
       "prompt_build_ms": 0.1,
-      "api_call_ms": 4159.3,
+      "api_call_ms": 4501.6,
       "parse_ms": 0.1,
-      "total_ms": 4159.5,
-      "output_tokens_per_sec": 107.7
+      "total_ms": 4501.8,
+      "output_tokens_per_sec": 96.2
     }
   },
   {
@@ -116,19 +116,19 @@
       ],
       "severity": "medium",
       "revenue_at_risk_usd": 2490000,
-      "reasoning": "P-1020 has a 50-unit shortfall (pooled demand 1,250 vs. available supply 1,200). Although SUP-003 is disrupted, SUP-002 can deliver in 21 days, meeting the earliest due date of 2026-08-26, providing one viable recovery path."
+      "reasoning": "Pooled demand for P-1020 (1,250 units) exceeds available supply (1,200 units), creating a 50-unit shortfall affecting all three open orders. SUP-003 (disrupted supplier) cannot support new orders, but alternate supplier SUP-002 can deliver within 21 days by 2026-08-24, meeting the earliest affected due date of 2026-08-26."
     },
     "model": "claude-haiku-4-5-20251001",
     "usage": {
-      "input_tokens": 2339,
-      "output_tokens": 823
+      "input_tokens": 2600,
+      "output_tokens": 720
     },
     "timing": {
-      "prompt_build_ms": 0.1,
-      "api_call_ms": 6961.7,
+      "prompt_build_ms": 0.2,
+      "api_call_ms": 5934.7,
       "parse_ms": 0.1,
-      "total_ms": 6961.9,
-      "output_tokens_per_sec": 118.2
+      "total_ms": 5935.0,
+      "output_tokens_per_sec": 121.3
     }
   },
   {
@@ -138,28 +138,53 @@
       "affected_orders": [],
       "severity": "none",
       "revenue_at_risk_usd": 0,
-      "reasoning": "P-1050 available supply is on-hand (340) + in-transit (0) = 340 against pooled demand of 150 (SO-4002 alone), so Meridian's delay creates no shortfall. Adversarial control: the rubric does not deduct safety_stock (200) -- protecting it would show 140 available, a false 10-unit shortfall, and excluding the disrupted sole supplier would then wrongly give high / SO-4002 / 420000."
+      "reasoning": "P-1050 available supply is on-hand (340) + in-transit (0) = 340 against pooled demand of 150 (SO-4002 alone), so Meridian's delay creates no shortfall. Two traps overlap here: Meridian also supplies P-1010, so answering about the wrong part reproduces case-1's answer, and deducting safety_stock (200) would show 140 available and a false 10-unit shortfall. Part scoping is the failure actually observed here; case 6 isolates the safety-stock trap on a supplier that has only one part."
     },
     "model_response": {
-      "affected_orders": [
-        "SO-4001",
-        "SO-4003"
-      ],
-      "severity": "high",
-      "revenue_at_risk_usd": 2630000,
-      "reasoning": "P-1010 (control board assembly) faces a pooled demand of 290 units across two open orders but only has 120 units available. Meridian Electronics is the sole supplier with a 35-day lead time; delivery by 2026-09-07 misses the earliest due date of 2026-08-21. Zero alternative suppliers exist, resulting in high severity."
+      "affected_orders": [],
+      "severity": "none",
+      "revenue_at_risk_usd": 0,
+      "reasoning": "P-1050 has 340 units on hand, which exceeds the pooled demand of 150 units across all open orders. No shortfall exists; the disruption to Meridian Electronics does not affect fulfillment."
     },
     "model": "claude-haiku-4-5-20251001",
     "usage": {
-      "input_tokens": 2338,
-      "output_tokens": 921
+      "input_tokens": 2599,
+      "output_tokens": 422
+    },
+    "timing": {
+      "prompt_build_ms": 0.1,
+      "api_call_ms": 4061.9,
+      "parse_ms": 0.1,
+      "total_ms": 4062.1,
+      "output_tokens_per_sec": 103.9
+    }
+  },
+  {
+    "case_id": "case-6",
+    "scenario": "Ferreira Hydraulics reports a production delay on the hydraulic manifold.",
+    "golden_answer": {
+      "affected_orders": [],
+      "severity": "none",
+      "revenue_at_risk_usd": 0,
+      "reasoning": "P-1060 available supply is on-hand (400) + in-transit (0) = 400 against pooled demand of 150 (SO-4010 alone), so the delay creates no shortfall. Isolated safety-stock control: Ferreira supplies only P-1060, so no other part can be mistaken for it, and deducting safety_stock (300) would leave 100 available, a false 50-unit shortfall, and wrongly give high / SO-4010 / 540000."
+    },
+    "model_response": {
+      "affected_orders": [],
+      "severity": "none",
+      "revenue_at_risk_usd": 0,
+      "reasoning": "P-1060 (hydraulic manifold) has 400 units on hand against a single open order requiring 150 units. The available supply exceeds demand, so no shortfall exists despite the Ferreira Hydraulics production delay."
+    },
+    "model": "claude-haiku-4-5-20251001",
+    "usage": {
+      "input_tokens": 2602,
+      "output_tokens": 372
     },
     "timing": {
       "prompt_build_ms": 0.2,
-      "api_call_ms": 7946.5,
+      "api_call_ms": 4156.6,
       "parse_ms": 0.1,
-      "total_ms": 7946.8,
-      "output_tokens_per_sec": 115.9
+      "total_ms": 4156.8,
+      "output_tokens_per_sec": 89.5
     }
   }
 ]
