@@ -1,4 +1,11 @@
 source_file,case_id,model,input_tokens,output_tokens,input_cost_usd,output_cost_usd,total_cost_usd
-results_claude-sonnet-4-6.json,case-1,claude-sonnet-4-6,1897,777,0.00569,0.01166,0.01735
-results_claude-sonnet-4-6.json,case-2,claude-sonnet-4-6,1891,697,0.00567,0.01046,0.01613
-results_claude-sonnet-4-6.json,case-3,claude-sonnet-4-6,1889,519,0.00567,0.00779,0.01345
+results_claude-haiku-4-5-20251001.json,case-1,claude-haiku-4-5-20251001,2347,585,0.00235,0.00293,0.00527
+results_claude-haiku-4-5-20251001.json,case-2,claude-haiku-4-5-20251001,2341,628,0.00234,0.00314,0.00548
+results_claude-haiku-4-5-20251001.json,case-3,claude-haiku-4-5-20251001,2341,448,0.00234,0.00224,0.00458
+results_claude-haiku-4-5-20251001.json,case-4,claude-haiku-4-5-20251001,2339,823,0.00234,0.00411,0.00645
+results_claude-haiku-4-5-20251001.json,case-5,claude-haiku-4-5-20251001,2338,921,0.00234,0.00461,0.00694
+results_claude-sonnet-4-6.json,case-1,claude-sonnet-4-6,2348,864,0.00704,0.01296,0.02
+results_claude-sonnet-4-6.json,case-2,claude-sonnet-4-6,2342,777,0.00703,0.01166,0.01868
+results_claude-sonnet-4-6.json,case-3,claude-sonnet-4-6,2342,384,0.00703,0.00576,0.01279
+results_claude-sonnet-4-6.json,case-4,claude-sonnet-4-6,2340,914,0.00702,0.01371,0.02073
+results_claude-sonnet-4-6.json,case-5,claude-sonnet-4-6,2339,403,0.00702,0.00605,0.01306

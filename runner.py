@@ -2,8 +2,8 @@
 Runner: loop through test cases -> call Claude -> store raw + parsed responses.
 
 Setup:
-  pip install anthropic
-  export ANTHROPIC_API_KEY=sk-ant-...
+  pip install anthropic python-dotenv
+  export ANTHROPIC_API_KEY=sk-ant-...   # or put it in a .env beside this script
 
 Run:
   python runner.py
@@ -15,9 +15,15 @@ import os
 import time
 from anthropic import Anthropic
 
-client = Anthropic()  # reads ANTHROPIC_API_KEY from environment
+try:
+    from dotenv import load_dotenv
+    load_dotenv()  # .env is optional; a real environment variable always wins
+except ImportError:
+    pass
 
-# Override with: export HARNESS_MODEL=claude-haiku-4-5-20251001
+client = Anthropic()  # reads ANTHROPIC_API_KEY from environment (or .env, loaded above)
+
+# Override with: export HARNESS_MODEL=claude-haiku-4-5-20251001 (or set it in .env)
 MODEL = os.environ.get("HARNESS_MODEL", "claude-sonnet-4-6")
 
 def extract_json(raw_text):

@@ -18,19 +18,19 @@
       ],
       "severity": "high",
       "revenue_at_risk_usd": 2630000,
-      "reasoning": "Pooled demand for P-1010 (290 units across SO-4001 and SO-4003) exceeds available supply of 120 units, creating a 170-unit shortfall. P-1010 is single-sourced exclusively through Meridian Electronics (SUP-001), the disrupted supplier, which cannot count toward replenishment; even without the disruption, a new PO from Meridian would arrive 2026-09-07, well past the earliest due date of 2026-08-21. With zero suppliers able to deliver in time, severity is high."
+      "reasoning": "P-1010 has pooled demand of 290 units across two open orders but only 120 units available. The sole supplier (Meridian Electronics) is disrupted with a 10-day delay, making it impossible to fulfill either order by the earliest due date (2026-08-21). Zero alternative suppliers can replenish in time."
     },
-    "model": "claude-sonnet-4-6",
+    "model": "claude-haiku-4-5-20251001",
     "usage": {
-      "input_tokens": 2348,
-      "output_tokens": 864
+      "input_tokens": 2347,
+      "output_tokens": 585
     },
     "timing": {
       "prompt_build_ms": 0.0,
-      "api_call_ms": 23305.6,
+      "api_call_ms": 6562.4,
       "parse_ms": 0.2,
-      "total_ms": 23305.9,
-      "output_tokens_per_sec": 37.1
+      "total_ms": 6562.6,
+      "output_tokens_per_sec": 89.1
     }
   },
   {
@@ -52,19 +52,19 @@
       ],
       "severity": "high",
       "revenue_at_risk_usd": 3700000,
-      "reasoning": "P-1030 (Polymer seal kit) is single-sourced from the disrupted Nantong Polymer. Combined available supply (60 on-hand + 200 in-transit = 260 units) falls short of pooled demand across SO-4005 and SO-4008 (300 units total), creating a 40-unit shortfall. With no alternate suppliers available for P-1030, zero suppliers can cover the shortfall before the earliest due date of 2026-09-14, resulting in high severity."
+      "reasoning": "Pooled demand for P-1030 (300 units) exceeds available supply (260 units), creating a 40-unit shortfall. The part has only one supplier (SUP-004, Nantong Polymer), which is disrupted and cannot deliver in time, leaving zero alternative suppliers to cover the shortfall before the earliest due date of 2026-09-14."
     },
-    "model": "claude-sonnet-4-6",
+    "model": "claude-haiku-4-5-20251001",
     "usage": {
-      "input_tokens": 2342,
-      "output_tokens": 777
+      "input_tokens": 2341,
+      "output_tokens": 628
     },
     "timing": {
       "prompt_build_ms": 0.1,
-      "api_call_ms": 15098.6,
+      "api_call_ms": 5670.5,
       "parse_ms": 0.1,
-      "total_ms": 15098.7,
-      "output_tokens_per_sec": 51.5
+      "total_ms": 5670.7,
+      "output_tokens_per_sec": 110.7
     }
   },
   {
@@ -80,19 +80,19 @@
       "affected_orders": [],
       "severity": "none",
       "revenue_at_risk_usd": 0,
-      "reasoning": "The only open order for P-1040 (SO-4006) requires 900 units, while on-hand inventory alone stands at 5,000 units with no in-transit stock needed. Available supply far exceeds pooled demand, so there is no shortfall despite the Corvair Fasteners delay."
+      "reasoning": "Corvair Fasteners supplies only P-1040 (Fastener set), which has 5,000 units on hand against total demand of 900 units. Available supply exceeds pooled demand, so no orders are disrupted despite the supplier delay."
     },
-    "model": "claude-sonnet-4-6",
+    "model": "claude-haiku-4-5-20251001",
     "usage": {
-      "input_tokens": 2342,
-      "output_tokens": 384
+      "input_tokens": 2341,
+      "output_tokens": 448
     },
     "timing": {
       "prompt_build_ms": 0.1,
-      "api_call_ms": 11351.8,
-      "parse_ms": 0.0,
-      "total_ms": 11351.9,
-      "output_tokens_per_sec": 33.8
+      "api_call_ms": 4159.3,
+      "parse_ms": 0.1,
+      "total_ms": 4159.5,
+      "output_tokens_per_sec": 107.7
     }
   },
   {
@@ -116,19 +116,19 @@
       ],
       "severity": "medium",
       "revenue_at_risk_usd": 2490000,
-      "reasoning": "Pooled demand for P-1020 across all three open orders totals 1,250 units, exceeding available supply (800 on-hand + 400 in-transit = 1,200) by 50 units. Although P-1020 is dual-sourced, the shortfall is real, and with the earliest affected due date of 2026-08-26, only one supplier (Aldridge Precision, SUP-002, 21-day lead time, arriving 2026-08-24) can deliver in time \u2014 Kessler Components is disrupted and cannot count. This yields medium severity."
+      "reasoning": "P-1020 has a 50-unit shortfall (pooled demand 1,250 vs. available supply 1,200). Although SUP-003 is disrupted, SUP-002 can deliver in 21 days, meeting the earliest due date of 2026-08-26, providing one viable recovery path."
     },
-    "model": "claude-sonnet-4-6",
+    "model": "claude-haiku-4-5-20251001",
     "usage": {
-      "input_tokens": 2340,
-      "output_tokens": 914
+      "input_tokens": 2339,
+      "output_tokens": 823
     },
     "timing": {
       "prompt_build_ms": 0.1,
-      "api_call_ms": 18473.6,
+      "api_call_ms": 6961.7,
       "parse_ms": 0.1,
-      "total_ms": 18473.8,
-      "output_tokens_per_sec": 49.5
+      "total_ms": 6961.9,
+      "output_tokens_per_sec": 118.2
     }
   },
   {
@@ -141,22 +141,25 @@
       "reasoning": "P-1050 available supply is on-hand (340) + in-transit (0) = 340 against pooled demand of 150 (SO-4002 alone), so Meridian's delay creates no shortfall. Adversarial control: the rubric does not deduct safety_stock (200) -- protecting it would show 140 available, a false 10-unit shortfall, and excluding the disrupted sole supplier would then wrongly give high / SO-4002 / 420000."
     },
     "model_response": {
-      "affected_orders": [],
-      "severity": "none",
-      "revenue_at_risk_usd": 0,
-      "reasoning": "The only open order for P-1050 (SO-4002) requires 150 units, while available supply (340 on-hand + 0 in-transit = 340 units) fully covers that demand. There is no shortfall, so no orders are affected by the Meridian Electronics production delay on the thermal sensor module."
+      "affected_orders": [
+        "SO-4001",
+        "SO-4003"
+      ],
+      "severity": "high",
+      "revenue_at_risk_usd": 2630000,
+      "reasoning": "P-1010 (control board assembly) faces a pooled demand of 290 units across two open orders but only has 120 units available. Meridian Electronics is the sole supplier with a 35-day lead time; delivery by 2026-09-07 misses the earliest due date of 2026-08-21. Zero alternative suppliers exist, resulting in high severity."
     },
-    "model": "claude-sonnet-4-6",
+    "model": "claude-haiku-4-5-20251001",
     "usage": {
-      "input_tokens": 2339,
-      "output_tokens": 403
+      "input_tokens": 2338,
+      "output_tokens": 921
     },
     "timing": {
-      "prompt_build_ms": 0.1,
-      "api_call_ms": 9928.0,
+      "prompt_build_ms": 0.2,
+      "api_call_ms": 7946.5,
       "parse_ms": 0.1,
-      "total_ms": 9928.2,
-      "output_tokens_per_sec": 40.6
+      "total_ms": 7946.8,
+      "output_tokens_per_sec": 115.9
     }
   }
 ]
