@@ -26,7 +26,7 @@ HARNESS_MODEL=claude-haiku-4-5-20251001 python runner.py   # run a different mod
 HARNESS_RUNS_PER_CASE=1 python runner.py                   # single run per case (fast/cheap)
 ```
 
-A full sweep of both models at 5 runs each is 70 calls, roughly $0.80 and ~14 minutes. Drop
+A full sweep of both models at 5 runs each is 70 calls, about $0.86 and ~15 minutes. Drop
 `HARNESS_RUNS_PER_CASE` to 1 while iterating on a prompt or fixture.
 
 Every script uses relative paths (`data/`, `results*.json`) — **run them from the repo root**, not
@@ -111,8 +111,8 @@ These are judgment calls baked into the golden answers, not derivable from the d
   `SYSTEM_PROMPT` about `safety_stock`; that deletes the fixture.
 - **Case 6's safety-stock trap has never fired, so in practice it tests scope discipline.** It was
   built as the isolated safety-stock control — SUP-006 supplies only P-1060, so the arithmetic is
-  unambiguous — but across 10 sampled runs (5 Sonnet + 5 Haiku) *no run has ever deducted
-  `safety_stock`*, and none has even mentioned it. Both models just apply `on_hand + in_transit` as
+  unambiguous — but across all 22 case-6 runs in the repo's committed history *no run has ever
+  deducted `safety_stock`*, and none has even mentioned it. Both models just apply `on_hand + in_transit` as
   `SYSTEM_PROMPT` states. Its single failure to date was Haiku ignoring the named part and auditing
   the whole dataset instead (7 orders, $8.82M), which is the same failure mode as case 5. Treat that
   as a real negative result, not a broken fixture: the question "do these models protect safety
