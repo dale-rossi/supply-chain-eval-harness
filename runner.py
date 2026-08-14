@@ -26,6 +26,12 @@ client = Anthropic()  # reads ANTHROPIC_API_KEY from environment (or .env, loade
 # Override with: export HARNESS_MODEL=claude-haiku-4-5-20251001 (or set it in .env)
 MODEL = os.environ.get("HARNESS_MODEL", "claude-sonnet-4-6")
 
+# One API call per (case, run). Temperature is left at the API default, so runs
+# genuinely vary -- that variance is the point: a single run cannot separate "the
+# model can't do this" from "it didn't do it that time". Override with:
+#   export HARNESS_RUNS_PER_CASE=1
+RUNS_PER_CASE = int(os.environ.get("HARNESS_RUNS_PER_CASE", "5"))
+
 def extract_json(raw_text):
     """Pull a JSON object out of a response, even if the model wrapped it in
     prose and/or a ```json fence instead of returning bare JSON as asked."""
@@ -94,63 +100,72 @@ def load_json(path):
         return json.load(f)
 
 
+def run_one(case, supply_chain, run_index):
+    """One API call for one (case, run) pair. Returns the result record."""
+    t0 = time.perf_counter()
+    user_prompt = (
+        f"SUPPLY CHAIN DATA:\n{json.dumps(supply_chain, indent=2)}\n\n"
+        f"SCENARIO:\n{case['scenario']}"
+    )
+    t1 = time.perf_counter()  # end of prompt build / start of API call
+
+    response = client.messages.create(
+        model=MODEL,
+        max_tokens=1500,
+        system=SYSTEM_PROMPT,
+        messages=[{"role": "user", "content": user_prompt}],
+    )
+    t2 = time.perf_counter()  # end of API call / start of parsing
+
+    raw_text = response.content[0].text
+    parsed = extract_json(raw_text)
+    if parsed is None:
+        parsed = {"parse_error": True, "raw": raw_text}
+    t3 = time.perf_counter()  # end of parsing
+
+    api_call_s = t2 - t1
+    timing = {
+        "prompt_build_ms": round((t1 - t0) * 1000, 1),
+        "api_call_ms": round(api_call_s * 1000, 1),
+        "parse_ms": round((t3 - t2) * 1000, 1),
+        "total_ms": round((t3 - t0) * 1000, 1),
+        "output_tokens_per_sec": (
+            round(response.usage.output_tokens / api_call_s, 1) if api_call_s > 0 else None
+        ),
+    }
+
+    return {
+        "case_id": case["id"],
+        "run_index": run_index,
+        "scenario": case["scenario"],
+        "golden_answer": case["golden_answer"],
+        "model_response": parsed,
+        "model": MODEL,
+        "usage": {
+            "input_tokens": response.usage.input_tokens,
+            "output_tokens": response.usage.output_tokens,
+        },
+        "timing": timing,
+    }
+
+
 def run():
     supply_chain = load_json("data/supply_chain.json")
     test_cases = load_json("data/test_cases.json")
     results = []
 
     for case in test_cases:
-        t0 = time.perf_counter()
-        user_prompt = (
-            f"SUPPLY CHAIN DATA:\n{json.dumps(supply_chain, indent=2)}\n\n"
-            f"SCENARIO:\n{case['scenario']}"
-        )
-        t1 = time.perf_counter()  # end of prompt build / start of API call
+        for run_index in range(RUNS_PER_CASE):
+            record = run_one(case, supply_chain, run_index)
+            results.append(record)
 
-        response = client.messages.create(
-            model=MODEL,
-            max_tokens=1500,
-            system=SYSTEM_PROMPT,
-            messages=[{"role": "user", "content": user_prompt}],
-        )
-        t2 = time.perf_counter()  # end of API call / start of parsing
-
-        raw_text = response.content[0].text
-        parsed = extract_json(raw_text)
-        if parsed is None:
-            parsed = {"parse_error": True, "raw": raw_text}
-        t3 = time.perf_counter()  # end of parsing
-
-        api_call_s = t2 - t1
-        timing = {
-            "prompt_build_ms": round((t1 - t0) * 1000, 1),
-            "api_call_ms": round(api_call_s * 1000, 1),
-            "parse_ms": round((t3 - t2) * 1000, 1),
-            "total_ms": round((t3 - t0) * 1000, 1),
-            "output_tokens_per_sec": (
-                round(response.usage.output_tokens / api_call_s, 1) if api_call_s > 0 else None
-            ),
-        }
-
-        results.append(
-            {
-                "case_id": case["id"],
-                "scenario": case["scenario"],
-                "golden_answer": case["golden_answer"],
-                "model_response": parsed,
-                "model": MODEL,
-                "usage": {
-                    "input_tokens": response.usage.input_tokens,
-                    "output_tokens": response.usage.output_tokens,
-                },
-                "timing": timing,
-            }
-        )
-        print(
-            f"Ran {case['id']} ({MODEL}): {parsed.get('severity', 'PARSE ERROR')} "
-            f"[{response.usage.input_tokens} in / {response.usage.output_tokens} out] "
-            f"[{timing['total_ms']}ms total, {timing['output_tokens_per_sec']} tok/s]"
-        )
+            usage, timing = record["usage"], record["timing"]
+            print(
+                f"Ran {case['id']} run {run_index + 1}/{RUNS_PER_CASE} ({MODEL}): "
+                f"{record['model_response'].get('severity', 'PARSE ERROR')} "
+                f"[{usage['input_tokens']} in / {usage['output_tokens']} out] "
+                f"[{timing['total_ms']}ms total, {timing['output_tokens_per_sec']} tok/s]"
+            )
     out_path = f"results_{MODEL.replace('.', '_')}.json"
     with open(out_path, "w") as f:
         json.dump(results, f, indent=2)

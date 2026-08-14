@@ -1,6 +1,7 @@
 [
   {
     "case_id": "case-1",
+    "run_index": 0,
     "scenario": "Meridian Electronics has notified us of a 10-day shipment delay on control board assemblies.",
     "golden_answer": {
       "affected_orders": [
@@ -18,23 +19,164 @@
       ],
       "severity": "high",
       "revenue_at_risk_usd": 2630000,
-      "reasoning": "Pooled demand for P-1010 (290 units) exceeds available supply (120 units), creating a 170-unit shortfall. P-1010 has only one supplier (SUP-001, disrupted with 10-day delay), which cannot deliver by the earliest due date of 2026-08-21. Zero alternate suppliers are available."
+      "reasoning": "Meridian Electronics' 10-day delay disrupts P-1010 (Control board assembly), the sole supplier for which creates a critical shortfall: pooled demand of 290 units exceeds available inventory of 120 units. The earliest affected order due date is 2026-08-21, but no alternative suppliers exist to recover the shipment in time, resulting in high severity."
     },
     "model": "claude-haiku-4-5-20251001",
     "usage": {
       "input_tokens": 2608,
-      "output_tokens": 613
+      "output_tokens": 708
     },
     "timing": {
       "prompt_build_ms": 0.0,
-      "api_call_ms": 5444.0,
+      "api_call_ms": 7723.3,
       "parse_ms": 0.1,
-      "total_ms": 5444.1,
-      "output_tokens_per_sec": 112.6
+      "total_ms": 7723.5,
+      "output_tokens_per_sec": 91.7
+    }
+  },
+  {
+    "case_id": "case-1",
+    "run_index": 1,
+    "scenario": "Meridian Electronics has notified us of a 10-day shipment delay on control board assemblies.",
+    "golden_answer": {
+      "affected_orders": [
+        "SO-4001",
+        "SO-4003"
+      ],
+      "severity": "high",
+      "revenue_at_risk_usd": 2630000,
+      "reasoning": "P-1010 is sole-sourced from Meridian. On-hand (120) vs. pooled demand (290) leaves a 170-unit shortfall, and the 35-day lead time means replenishment lands after both due dates."
+    },
+    "model_response": {
+      "affected_orders": [
+        "SO-4001",
+        "SO-4003"
+      ],
+      "severity": "high",
+      "revenue_at_risk_usd": 2630000,
+      "reasoning": "Pooled demand for P-1010 (290 units) exceeds available supply (120 units), creating a shortfall that affects both open orders. The sole supplier (SUP-001) is disrupted with a 10-day delay and cannot be counted for recovery. With zero suppliers capable of delivering by the earliest due date of 2026-08-21, severity is high."
+    },
+    "model": "claude-haiku-4-5-20251001",
+    "usage": {
+      "input_tokens": 2608,
+      "output_tokens": 625
+    },
+    "timing": {
+      "prompt_build_ms": 0.1,
+      "api_call_ms": 5690.7,
+      "parse_ms": 0.1,
+      "total_ms": 5690.8,
+      "output_tokens_per_sec": 109.8
+    }
+  },
+  {
+    "case_id": "case-1",
+    "run_index": 2,
+    "scenario": "Meridian Electronics has notified us of a 10-day shipment delay on control board assemblies.",
+    "golden_answer": {
+      "affected_orders": [
+        "SO-4001",
+        "SO-4003"
+      ],
+      "severity": "high",
+      "revenue_at_risk_usd": 2630000,
+      "reasoning": "P-1010 is sole-sourced from Meridian. On-hand (120) vs. pooled demand (290) leaves a 170-unit shortfall, and the 35-day lead time means replenishment lands after both due dates."
+    },
+    "model_response": {
+      "affected_orders": [
+        "SO-4001",
+        "SO-4003"
+      ],
+      "severity": "high",
+      "revenue_at_risk_usd": 2630000,
+      "reasoning": "Pooled demand for P-1010 (290 units) exceeds available supply (120 units on-hand), creating a shortfall of 170 units. The disrupted supplier SUP-001 is the sole source for this part and cannot deliver in time due to the 10-day delay, leaving zero alternative suppliers to cover the gap before the earliest due date of 2026-08-21."
+    },
+    "model": "claude-haiku-4-5-20251001",
+    "usage": {
+      "input_tokens": 2608,
+      "output_tokens": 680
+    },
+    "timing": {
+      "prompt_build_ms": 0.1,
+      "api_call_ms": 6355.5,
+      "parse_ms": 0.1,
+      "total_ms": 6355.7,
+      "output_tokens_per_sec": 107.0
+    }
+  },
+  {
+    "case_id": "case-1",
+    "run_index": 3,
+    "scenario": "Meridian Electronics has notified us of a 10-day shipment delay on control board assemblies.",
+    "golden_answer": {
+      "affected_orders": [
+        "SO-4001",
+        "SO-4003"
+      ],
+      "severity": "high",
+      "revenue_at_risk_usd": 2630000,
+      "reasoning": "P-1010 is sole-sourced from Meridian. On-hand (120) vs. pooled demand (290) leaves a 170-unit shortfall, and the 35-day lead time means replenishment lands after both due dates."
+    },
+    "model_response": {
+      "affected_orders": [
+        "SO-4001",
+        "SO-4003"
+      ],
+      "severity": "high",
+      "revenue_at_risk_usd": 2630000,
+      "reasoning": "P-1010 has a 290-unit pooled demand but only 120 units available, creating a 170-unit shortfall. The sole supplier (Meridian Electronics) is disrupted with a 10-day delay, making delivery by the earliest due date (2026-08-21) impossible. No alternative suppliers exist for this critical part."
+    },
+    "model": "claude-haiku-4-5-20251001",
+    "usage": {
+      "input_tokens": 2608,
+      "output_tokens": 730
+    },
+    "timing": {
+      "prompt_build_ms": 0.1,
+      "api_call_ms": 6682.8,
+      "parse_ms": 0.1,
+      "total_ms": 6683.0,
+      "output_tokens_per_sec": 109.2
+    }
+  },
+  {
+    "case_id": "case-1",
+    "run_index": 4,
+    "scenario": "Meridian Electronics has notified us of a 10-day shipment delay on control board assemblies.",
+    "golden_answer": {
+      "affected_orders": [
+        "SO-4001",
+        "SO-4003"
+      ],
+      "severity": "high",
+      "revenue_at_risk_usd": 2630000,
+      "reasoning": "P-1010 is sole-sourced from Meridian. On-hand (120) vs. pooled demand (290) leaves a 170-unit shortfall, and the 35-day lead time means replenishment lands after both due dates."
+    },
+    "model_response": {
+      "affected_orders": [
+        "SO-4001",
+        "SO-4003"
+      ],
+      "severity": "high",
+      "revenue_at_risk_usd": 2630000,
+      "reasoning": "Pooled demand for P-1010 (290 units) exceeds available supply (120 units), creating a shortfall of 170 units. Meridian Electronics is the sole supplier and is disrupted with a 10-day delay, making it unable to deliver before the earliest due date of 2026-08-21. No alternative suppliers exist for this part."
+    },
+    "model": "claude-haiku-4-5-20251001",
+    "usage": {
+      "input_tokens": 2608,
+      "output_tokens": 665
+    },
+    "timing": {
+      "prompt_build_ms": 0.1,
+      "api_call_ms": 6861.7,
+      "parse_ms": 0.1,
+      "total_ms": 6861.9,
+      "output_tokens_per_sec": 96.9
     }
   },
   {
     "case_id": "case-2",
+    "run_index": 0,
     "scenario": "Nantong Polymer reports a delay affecting production of the polymer seal kit.",
     "golden_answer": {
       "affected_orders": [
@@ -52,23 +194,164 @@
       ],
       "severity": "high",
       "revenue_at_risk_usd": 3700000,
-      "reasoning": "Pooled demand for P-1030 (300 units) exceeds available supply (260 units), creating a 40-unit shortfall. P-1030 has only one supplier (SUP-004), which is disrupted and cannot deliver additional inventory in time for the earliest due date of 2026-09-14. Zero alternate suppliers are available."
+      "reasoning": "Pooled demand for P-1030 (300 units) exceeds available supply (260 units), creating a 40-unit shortfall. SUP-004 is the sole supplier and is disrupted, leaving zero suppliers capable of delivering replacement inventory before the earliest affected due date (2026-09-14)."
     },
     "model": "claude-haiku-4-5-20251001",
     "usage": {
       "input_tokens": 2602,
-      "output_tokens": 553
+      "output_tokens": 669
     },
     "timing": {
       "prompt_build_ms": 0.1,
-      "api_call_ms": 5673.7,
+      "api_call_ms": 6013.4,
       "parse_ms": 0.1,
-      "total_ms": 5673.8,
-      "output_tokens_per_sec": 97.5
+      "total_ms": 6013.6,
+      "output_tokens_per_sec": 111.3
+    }
+  },
+  {
+    "case_id": "case-2",
+    "run_index": 1,
+    "scenario": "Nantong Polymer reports a delay affecting production of the polymer seal kit.",
+    "golden_answer": {
+      "affected_orders": [
+        "SO-4005",
+        "SO-4008"
+      ],
+      "severity": "high",
+      "revenue_at_risk_usd": 3700000,
+      "reasoning": "Sole supplier for P-1030. On-hand (60) + in-transit (200) = 260 units vs. 300 units pooled demand -> 40-unit shortfall. Convention: any shortfall flags all orders sharing the part."
+    },
+    "model_response": {
+      "affected_orders": [
+        "SO-4005",
+        "SO-4008"
+      ],
+      "severity": "high",
+      "revenue_at_risk_usd": 3700000,
+      "reasoning": "Nantong Polymer's delay on P-1030 creates a 40-unit shortfall (300-unit pooled demand vs. 260-unit available supply). With no alternative suppliers and the disrupted supplier unable to provide emergency capacity, no suppliers can deliver in time to meet the earliest affected due date of 2026-09-14."
+    },
+    "model": "claude-haiku-4-5-20251001",
+    "usage": {
+      "input_tokens": 2602,
+      "output_tokens": 621
+    },
+    "timing": {
+      "prompt_build_ms": 0.2,
+      "api_call_ms": 6171.6,
+      "parse_ms": 0.1,
+      "total_ms": 6171.8,
+      "output_tokens_per_sec": 100.6
+    }
+  },
+  {
+    "case_id": "case-2",
+    "run_index": 2,
+    "scenario": "Nantong Polymer reports a delay affecting production of the polymer seal kit.",
+    "golden_answer": {
+      "affected_orders": [
+        "SO-4005",
+        "SO-4008"
+      ],
+      "severity": "high",
+      "revenue_at_risk_usd": 3700000,
+      "reasoning": "Sole supplier for P-1030. On-hand (60) + in-transit (200) = 260 units vs. 300 units pooled demand -> 40-unit shortfall. Convention: any shortfall flags all orders sharing the part."
+    },
+    "model_response": {
+      "affected_orders": [
+        "SO-4005",
+        "SO-4008"
+      ],
+      "severity": "high",
+      "revenue_at_risk_usd": 3700000,
+      "reasoning": "Nantong Polymer's production delay on P-1030 creates a 10-unit shortfall (270 units demanded vs. 260 available). The part has only one supplier, which is disrupted and cannot deliver in time. Both orders requiring this part are at risk."
+    },
+    "model": "claude-haiku-4-5-20251001",
+    "usage": {
+      "input_tokens": 2602,
+      "output_tokens": 692
+    },
+    "timing": {
+      "prompt_build_ms": 0.1,
+      "api_call_ms": 6861.3,
+      "parse_ms": 0.1,
+      "total_ms": 6861.5,
+      "output_tokens_per_sec": 100.9
+    }
+  },
+  {
+    "case_id": "case-2",
+    "run_index": 3,
+    "scenario": "Nantong Polymer reports a delay affecting production of the polymer seal kit.",
+    "golden_answer": {
+      "affected_orders": [
+        "SO-4005",
+        "SO-4008"
+      ],
+      "severity": "high",
+      "revenue_at_risk_usd": 3700000,
+      "reasoning": "Sole supplier for P-1030. On-hand (60) + in-transit (200) = 260 units vs. 300 units pooled demand -> 40-unit shortfall. Convention: any shortfall flags all orders sharing the part."
+    },
+    "model_response": {
+      "affected_orders": [
+        "SO-4005",
+        "SO-4008"
+      ],
+      "severity": "high",
+      "revenue_at_risk_usd": 3700000,
+      "reasoning": "P-1030 (Polymer seal kit) has a pooled demand of 300 units across two open orders but only 260 units available (60 on-hand + 200 in-transit), creating a 40-unit shortfall. The disrupted supplier SUP-004 is the sole source for this part, leaving zero alternative suppliers capable of delivering before the earliest affected due date of 2026-09-14."
+    },
+    "model": "claude-haiku-4-5-20251001",
+    "usage": {
+      "input_tokens": 2602,
+      "output_tokens": 603
+    },
+    "timing": {
+      "prompt_build_ms": 0.1,
+      "api_call_ms": 5335.9,
+      "parse_ms": 0.1,
+      "total_ms": 5336.1,
+      "output_tokens_per_sec": 113.0
+    }
+  },
+  {
+    "case_id": "case-2",
+    "run_index": 4,
+    "scenario": "Nantong Polymer reports a delay affecting production of the polymer seal kit.",
+    "golden_answer": {
+      "affected_orders": [
+        "SO-4005",
+        "SO-4008"
+      ],
+      "severity": "high",
+      "revenue_at_risk_usd": 3700000,
+      "reasoning": "Sole supplier for P-1030. On-hand (60) + in-transit (200) = 260 units vs. 300 units pooled demand -> 40-unit shortfall. Convention: any shortfall flags all orders sharing the part."
+    },
+    "model_response": {
+      "affected_orders": [
+        "SO-4005",
+        "SO-4008"
+      ],
+      "severity": "high",
+      "revenue_at_risk_usd": 3700000,
+      "reasoning": "P-1030 pooled demand (300 units) exceeds available supply (260 units), creating a 40-unit shortfall. SUP-004 is the sole supplier and is disrupted; no alternate source exists. Zero suppliers can deliver in time, yielding high severity."
+    },
+    "model": "claude-haiku-4-5-20251001",
+    "usage": {
+      "input_tokens": 2602,
+      "output_tokens": 756
+    },
+    "timing": {
+      "prompt_build_ms": 0.1,
+      "api_call_ms": 7853.6,
+      "parse_ms": 0.1,
+      "total_ms": 7853.7,
+      "output_tokens_per_sec": 96.3
     }
   },
   {
     "case_id": "case-3",
+    "run_index": 0,
     "scenario": "Corvair Fasteners reports a delay affecting production of the fastener set.",
     "golden_answer": {
       "affected_orders": [],
@@ -80,23 +363,140 @@
       "affected_orders": [],
       "severity": "none",
       "revenue_at_risk_usd": 0,
-      "reasoning": "P-1040 has 5,000 units on-hand against a pooled demand of only 900 units (SO-4006). Available supply exceeds demand by 4,100 units, so the Corvair Fasteners production delay does not create a shortfall."
+      "reasoning": "P-1040 has 5,000 units available (on-hand inventory), while the only open order (SO-4006) requires 900 units. Available supply exceeds pooled demand, so no shortfall exists despite the Corvair Fasteners production delay."
     },
     "model": "claude-haiku-4-5-20251001",
     "usage": {
       "input_tokens": 2602,
-      "output_tokens": 433
+      "output_tokens": 412
     },
     "timing": {
       "prompt_build_ms": 0.1,
-      "api_call_ms": 4501.6,
+      "api_call_ms": 4420.8,
+      "parse_ms": 0.0,
+      "total_ms": 4421.0,
+      "output_tokens_per_sec": 93.2
+    }
+  },
+  {
+    "case_id": "case-3",
+    "run_index": 1,
+    "scenario": "Corvair Fasteners reports a delay affecting production of the fastener set.",
+    "golden_answer": {
+      "affected_orders": [],
+      "severity": "none",
+      "revenue_at_risk_usd": 0,
+      "reasoning": "P-1040 is sole-sourced from Corvair, but on-hand (5000) dwarfs pooled demand (900, all from SO-4006), so the delay creates no shortfall. Negative control: a supplier delay is not itself a shortfall when inventory already covers demand."
+    },
+    "model_response": {
+      "affected_orders": [],
+      "severity": "none",
+      "revenue_at_risk_usd": 0,
+      "reasoning": "P-1040 (Fastener set) has 5,000 units on hand plus in transit, while pooled demand across all open orders is only 900 units. The available supply substantially exceeds demand, so the Corvair Fasteners production delay does not create a shortfall."
+    },
+    "model": "claude-haiku-4-5-20251001",
+    "usage": {
+      "input_tokens": 2602,
+      "output_tokens": 364
+    },
+    "timing": {
+      "prompt_build_ms": 0.1,
+      "api_call_ms": 3640.9,
       "parse_ms": 0.1,
-      "total_ms": 4501.8,
-      "output_tokens_per_sec": 96.2
+      "total_ms": 3641.0,
+      "output_tokens_per_sec": 100.0
+    }
+  },
+  {
+    "case_id": "case-3",
+    "run_index": 2,
+    "scenario": "Corvair Fasteners reports a delay affecting production of the fastener set.",
+    "golden_answer": {
+      "affected_orders": [],
+      "severity": "none",
+      "revenue_at_risk_usd": 0,
+      "reasoning": "P-1040 is sole-sourced from Corvair, but on-hand (5000) dwarfs pooled demand (900, all from SO-4006), so the delay creates no shortfall. Negative control: a supplier delay is not itself a shortfall when inventory already covers demand."
+    },
+    "model_response": {
+      "affected_orders": [],
+      "severity": "none",
+      "revenue_at_risk_usd": 0,
+      "reasoning": "P-1040 (Fastener set) has 5,000 units of available supply (on_hand + in_transit) against pooled demand of only 900 units across SO-4006. The Corvair Fasteners delay does not create a shortfall."
+    },
+    "model": "claude-haiku-4-5-20251001",
+    "usage": {
+      "input_tokens": 2602,
+      "output_tokens": 689
+    },
+    "timing": {
+      "prompt_build_ms": 0.2,
+      "api_call_ms": 6562.7,
+      "parse_ms": 0.0,
+      "total_ms": 6563.0,
+      "output_tokens_per_sec": 105.0
+    }
+  },
+  {
+    "case_id": "case-3",
+    "run_index": 3,
+    "scenario": "Corvair Fasteners reports a delay affecting production of the fastener set.",
+    "golden_answer": {
+      "affected_orders": [],
+      "severity": "none",
+      "revenue_at_risk_usd": 0,
+      "reasoning": "P-1040 is sole-sourced from Corvair, but on-hand (5000) dwarfs pooled demand (900, all from SO-4006), so the delay creates no shortfall. Negative control: a supplier delay is not itself a shortfall when inventory already covers demand."
+    },
+    "model_response": {
+      "affected_orders": [],
+      "severity": "none",
+      "revenue_at_risk_usd": 0,
+      "reasoning": "The Corvair Fasteners delay affects P-1040 (Fastener set). With 5000 units available (on_hand + in_transit) against 900 units of pooled demand, there is no shortfall. No orders are affected by this disruption."
+    },
+    "model": "claude-haiku-4-5-20251001",
+    "usage": {
+      "input_tokens": 2602,
+      "output_tokens": 778
+    },
+    "timing": {
+      "prompt_build_ms": 0.1,
+      "api_call_ms": 6177.2,
+      "parse_ms": 0.1,
+      "total_ms": 6177.3,
+      "output_tokens_per_sec": 125.9
+    }
+  },
+  {
+    "case_id": "case-3",
+    "run_index": 4,
+    "scenario": "Corvair Fasteners reports a delay affecting production of the fastener set.",
+    "golden_answer": {
+      "affected_orders": [],
+      "severity": "none",
+      "revenue_at_risk_usd": 0,
+      "reasoning": "P-1040 is sole-sourced from Corvair, but on-hand (5000) dwarfs pooled demand (900, all from SO-4006), so the delay creates no shortfall. Negative control: a supplier delay is not itself a shortfall when inventory already covers demand."
+    },
+    "model_response": {
+      "affected_orders": [],
+      "severity": "none",
+      "revenue_at_risk_usd": 0,
+      "reasoning": "P-1040 (Fastener set) has 5,000 units on hand against only 900 units of pooled demand from SO-4006. The available supply far exceeds demand, so the Corvair Fasteners delay does not create a shortage."
+    },
+    "model": "claude-haiku-4-5-20251001",
+    "usage": {
+      "input_tokens": 2602,
+      "output_tokens": 363
+    },
+    "timing": {
+      "prompt_build_ms": 0.2,
+      "api_call_ms": 3996.3,
+      "parse_ms": 0.0,
+      "total_ms": 3996.5,
+      "output_tokens_per_sec": 90.8
     }
   },
   {
     "case_id": "case-4",
+    "run_index": 0,
     "scenario": "Kessler Components reports a delay affecting production of the precision housing.",
     "golden_answer": {
       "affected_orders": [
@@ -116,23 +516,172 @@
       ],
       "severity": "medium",
       "revenue_at_risk_usd": 2490000,
-      "reasoning": "Pooled demand for P-1020 (1,250 units) exceeds available supply (1,200 units), creating a 50-unit shortfall affecting all three open orders. SUP-003 (disrupted supplier) cannot support new orders, but alternate supplier SUP-002 can deliver within 21 days by 2026-08-24, meeting the earliest affected due date of 2026-08-26."
+      "reasoning": "Kessler Components delay affects P-1020; pooled demand (1,250 units) exceeds available supply (1,200 units), creating a 50-unit shortfall across all three orders. However, alternate supplier Aldridge Precision can deliver within 21 days, arriving by 2026-08-24, before the earliest due date of 2026-08-26."
     },
     "model": "claude-haiku-4-5-20251001",
     "usage": {
       "input_tokens": 2600,
-      "output_tokens": 720
+      "output_tokens": 722
     },
     "timing": {
-      "prompt_build_ms": 0.2,
-      "api_call_ms": 5934.7,
+      "prompt_build_ms": 0.1,
+      "api_call_ms": 6550.0,
       "parse_ms": 0.1,
-      "total_ms": 5935.0,
-      "output_tokens_per_sec": 121.3
+      "total_ms": 6550.2,
+      "output_tokens_per_sec": 110.2
+    }
+  },
+  {
+    "case_id": "case-4",
+    "run_index": 1,
+    "scenario": "Kessler Components reports a delay affecting production of the precision housing.",
+    "golden_answer": {
+      "affected_orders": [
+        "SO-4004",
+        "SO-4007",
+        "SO-4009"
+      ],
+      "severity": "medium",
+      "revenue_at_risk_usd": 2490000,
+      "reasoning": "P-1020 pooled demand (300 + 450 + 500 = 1250) exceeds available supply (800 on-hand + 400 in-transit = 1200), a 50-unit shortfall that flags all three orders. Kessler is disrupted and so is excluded, but Aldridge's 21-day lead time puts a PO placed 2026-08-03 at 2026-08-24, inside the earliest affected due date of 2026-08-26 -- exactly one supplier in time, so medium."
+    },
+    "model_response": {
+      "affected_orders": [
+        "SO-4004",
+        "SO-4007",
+        "SO-4009"
+      ],
+      "severity": "low",
+      "revenue_at_risk_usd": 2490000,
+      "reasoning": "P-1020 has a 50-unit shortfall (1,250 units pooled demand vs. 1,200 available supply). However, the non-disrupted supplier Aldridge Precision can deliver within 21 days (by 2026-08-24), which is before the earliest affected due date of 2026-08-26, enabling full recovery of the shortfall."
+    },
+    "model": "claude-haiku-4-5-20251001",
+    "usage": {
+      "input_tokens": 2600,
+      "output_tokens": 810
+    },
+    "timing": {
+      "prompt_build_ms": 0.1,
+      "api_call_ms": 6658.9,
+      "parse_ms": 0.1,
+      "total_ms": 6659.1,
+      "output_tokens_per_sec": 121.6
+    }
+  },
+  {
+    "case_id": "case-4",
+    "run_index": 2,
+    "scenario": "Kessler Components reports a delay affecting production of the precision housing.",
+    "golden_answer": {
+      "affected_orders": [
+        "SO-4004",
+        "SO-4007",
+        "SO-4009"
+      ],
+      "severity": "medium",
+      "revenue_at_risk_usd": 2490000,
+      "reasoning": "P-1020 pooled demand (300 + 450 + 500 = 1250) exceeds available supply (800 on-hand + 400 in-transit = 1200), a 50-unit shortfall that flags all three orders. Kessler is disrupted and so is excluded, but Aldridge's 21-day lead time puts a PO placed 2026-08-03 at 2026-08-24, inside the earliest affected due date of 2026-08-26 -- exactly one supplier in time, so medium."
+    },
+    "model_response": {
+      "affected_orders": [
+        "SO-4004",
+        "SO-4007",
+        "SO-4009"
+      ],
+      "severity": "medium",
+      "revenue_at_risk_usd": 2490000,
+      "reasoning": "Kessler Components delay on P-1020 creates a 50-unit shortfall against pooled demand of 1,250 units. However, alternate supplier Aldridge Precision can deliver within 21 days (by 2026-08-24), ahead of the earliest affected order due date of 2026-08-26, making this a medium-severity risk."
+    },
+    "model": "claude-haiku-4-5-20251001",
+    "usage": {
+      "input_tokens": 2600,
+      "output_tokens": 698
+    },
+    "timing": {
+      "prompt_build_ms": 0.1,
+      "api_call_ms": 6477.3,
+      "parse_ms": 0.1,
+      "total_ms": 6477.5,
+      "output_tokens_per_sec": 107.8
+    }
+  },
+  {
+    "case_id": "case-4",
+    "run_index": 3,
+    "scenario": "Kessler Components reports a delay affecting production of the precision housing.",
+    "golden_answer": {
+      "affected_orders": [
+        "SO-4004",
+        "SO-4007",
+        "SO-4009"
+      ],
+      "severity": "medium",
+      "revenue_at_risk_usd": 2490000,
+      "reasoning": "P-1020 pooled demand (300 + 450 + 500 = 1250) exceeds available supply (800 on-hand + 400 in-transit = 1200), a 50-unit shortfall that flags all three orders. Kessler is disrupted and so is excluded, but Aldridge's 21-day lead time puts a PO placed 2026-08-03 at 2026-08-24, inside the earliest affected due date of 2026-08-26 -- exactly one supplier in time, so medium."
+    },
+    "model_response": {
+      "affected_orders": [
+        "SO-4004",
+        "SO-4007",
+        "SO-4009"
+      ],
+      "severity": "low",
+      "revenue_at_risk_usd": 2490000,
+      "reasoning": "P-1020 has a 50-unit shortfall (1,250 units pooled demand vs. 1,200 available supply), affecting three orders. However, the non-disrupted supplier SUP-002 can deliver in 21 days (by 2026-08-24), meeting the earliest due date of 2026-08-26, so the risk is mitigated."
+    },
+    "model": "claude-haiku-4-5-20251001",
+    "usage": {
+      "input_tokens": 2600,
+      "output_tokens": 758
+    },
+    "timing": {
+      "prompt_build_ms": 0.1,
+      "api_call_ms": 6833.4,
+      "parse_ms": 0.1,
+      "total_ms": 6833.5,
+      "output_tokens_per_sec": 110.9
+    }
+  },
+  {
+    "case_id": "case-4",
+    "run_index": 4,
+    "scenario": "Kessler Components reports a delay affecting production of the precision housing.",
+    "golden_answer": {
+      "affected_orders": [
+        "SO-4004",
+        "SO-4007",
+        "SO-4009"
+      ],
+      "severity": "medium",
+      "revenue_at_risk_usd": 2490000,
+      "reasoning": "P-1020 pooled demand (300 + 450 + 500 = 1250) exceeds available supply (800 on-hand + 400 in-transit = 1200), a 50-unit shortfall that flags all three orders. Kessler is disrupted and so is excluded, but Aldridge's 21-day lead time puts a PO placed 2026-08-03 at 2026-08-24, inside the earliest affected due date of 2026-08-26 -- exactly one supplier in time, so medium."
+    },
+    "model_response": {
+      "affected_orders": [
+        "SO-4004",
+        "SO-4007",
+        "SO-4009"
+      ],
+      "severity": "medium",
+      "revenue_at_risk_usd": 2490000,
+      "reasoning": "Kessler Components' delay on P-1020 creates a shortfall of 50 units against 1,250 units of pooled demand from three open orders. However, Aldridge Precision (SUP-002) can deliver via its 21-day lead time by 2026-08-24, meeting the earliest due date of 2026-08-26, allowing mitigation of the shortfall."
+    },
+    "model": "claude-haiku-4-5-20251001",
+    "usage": {
+      "input_tokens": 2600,
+      "output_tokens": 693
+    },
+    "timing": {
+      "prompt_build_ms": 0.1,
+      "api_call_ms": 5563.2,
+      "parse_ms": 0.1,
+      "total_ms": 5563.4,
+      "output_tokens_per_sec": 124.6
     }
   },
   {
     "case_id": "case-5",
+    "run_index": 0,
     "scenario": "Meridian Electronics reports a production delay on the thermal sensor module.",
     "golden_answer": {
       "affected_orders": [],
@@ -144,7 +693,36 @@
       "affected_orders": [],
       "severity": "none",
       "revenue_at_risk_usd": 0,
-      "reasoning": "P-1050 has 340 units on hand, which exceeds the pooled demand of 150 units across all open orders. No shortfall exists; the disruption to Meridian Electronics does not affect fulfillment."
+      "reasoning": "The disruption affects P-1050 (Thermal sensor module) from Meridian Electronics, but available inventory (340 units on hand) exceeds the pooled demand across all open orders (150 units for SO-4002). No shortfall exists, so no orders are affected."
+    },
+    "model": "claude-haiku-4-5-20251001",
+    "usage": {
+      "input_tokens": 2599,
+      "output_tokens": 598
+    },
+    "timing": {
+      "prompt_build_ms": 0.1,
+      "api_call_ms": 5600.2,
+      "parse_ms": 0.1,
+      "total_ms": 5600.5,
+      "output_tokens_per_sec": 106.8
+    }
+  },
+  {
+    "case_id": "case-5",
+    "run_index": 1,
+    "scenario": "Meridian Electronics reports a production delay on the thermal sensor module.",
+    "golden_answer": {
+      "affected_orders": [],
+      "severity": "none",
+      "revenue_at_risk_usd": 0,
+      "reasoning": "P-1050 available supply is on-hand (340) + in-transit (0) = 340 against pooled demand of 150 (SO-4002 alone), so Meridian's delay creates no shortfall. Two traps overlap here: Meridian also supplies P-1010, so answering about the wrong part reproduces case-1's answer, and deducting safety_stock (200) would show 140 available and a false 10-unit shortfall. Part scoping is the failure actually observed here; case 6 isolates the safety-stock trap on a supplier that has only one part."
+    },
+    "model_response": {
+      "affected_orders": [],
+      "severity": "none",
+      "revenue_at_risk_usd": 0,
+      "reasoning": "Meridian Electronics' delay on P-1050 does not create a shortfall; available inventory (340 units on-hand) exceeds the pooled demand across all open orders for this part (150 units). SO-4002 can be fulfilled from current stock."
     },
     "model": "claude-haiku-4-5-20251001",
     "usage": {
@@ -152,15 +730,109 @@
       "output_tokens": 422
     },
     "timing": {
-      "prompt_build_ms": 0.1,
-      "api_call_ms": 4061.9,
+      "prompt_build_ms": 0.2,
+      "api_call_ms": 4297.3,
       "parse_ms": 0.1,
-      "total_ms": 4062.1,
-      "output_tokens_per_sec": 103.9
+      "total_ms": 4297.5,
+      "output_tokens_per_sec": 98.2
+    }
+  },
+  {
+    "case_id": "case-5",
+    "run_index": 2,
+    "scenario": "Meridian Electronics reports a production delay on the thermal sensor module.",
+    "golden_answer": {
+      "affected_orders": [],
+      "severity": "none",
+      "revenue_at_risk_usd": 0,
+      "reasoning": "P-1050 available supply is on-hand (340) + in-transit (0) = 340 against pooled demand of 150 (SO-4002 alone), so Meridian's delay creates no shortfall. Two traps overlap here: Meridian also supplies P-1010, so answering about the wrong part reproduces case-1's answer, and deducting safety_stock (200) would show 140 available and a false 10-unit shortfall. Part scoping is the failure actually observed here; case 6 isolates the safety-stock trap on a supplier that has only one part."
+    },
+    "model_response": {
+      "affected_orders": [
+        "SO-4001",
+        "SO-4003"
+      ],
+      "severity": "high",
+      "revenue_at_risk_usd": 2630000,
+      "reasoning": "Meridian Electronics' production delay on P-1010 creates a shortfall: pooled demand (290 units) exceeds available supply (120 units). The sole supplier cannot deliver replacement inventory by the earliest affected due date (2026-08-21), as a new order would not arrive until 2026-09-07, making this a high-severity disruption."
+    },
+    "model": "claude-haiku-4-5-20251001",
+    "usage": {
+      "input_tokens": 2599,
+      "output_tokens": 781
+    },
+    "timing": {
+      "prompt_build_ms": 0.1,
+      "api_call_ms": 7293.2,
+      "parse_ms": 0.1,
+      "total_ms": 7293.4,
+      "output_tokens_per_sec": 107.1
+    }
+  },
+  {
+    "case_id": "case-5",
+    "run_index": 3,
+    "scenario": "Meridian Electronics reports a production delay on the thermal sensor module.",
+    "golden_answer": {
+      "affected_orders": [],
+      "severity": "none",
+      "revenue_at_risk_usd": 0,
+      "reasoning": "P-1050 available supply is on-hand (340) + in-transit (0) = 340 against pooled demand of 150 (SO-4002 alone), so Meridian's delay creates no shortfall. Two traps overlap here: Meridian also supplies P-1010, so answering about the wrong part reproduces case-1's answer, and deducting safety_stock (200) would show 140 available and a false 10-unit shortfall. Part scoping is the failure actually observed here; case 6 isolates the safety-stock trap on a supplier that has only one part."
+    },
+    "model_response": {
+      "affected_orders": [],
+      "severity": "none",
+      "revenue_at_risk_usd": 0,
+      "reasoning": "P-1050 has 340 units on hand, exceeding the pooled demand of 150 units from SO-4002. Available supply is sufficient to fulfill all orders without relying on the disrupted supplier's replenishment."
+    },
+    "model": "claude-haiku-4-5-20251001",
+    "usage": {
+      "input_tokens": 2599,
+      "output_tokens": 409
+    },
+    "timing": {
+      "prompt_build_ms": 0.2,
+      "api_call_ms": 4352.3,
+      "parse_ms": 0.1,
+      "total_ms": 4352.7,
+      "output_tokens_per_sec": 94.0
+    }
+  },
+  {
+    "case_id": "case-5",
+    "run_index": 4,
+    "scenario": "Meridian Electronics reports a production delay on the thermal sensor module.",
+    "golden_answer": {
+      "affected_orders": [],
+      "severity": "none",
+      "revenue_at_risk_usd": 0,
+      "reasoning": "P-1050 available supply is on-hand (340) + in-transit (0) = 340 against pooled demand of 150 (SO-4002 alone), so Meridian's delay creates no shortfall. Two traps overlap here: Meridian also supplies P-1010, so answering about the wrong part reproduces case-1's answer, and deducting safety_stock (200) would show 140 available and a false 10-unit shortfall. Part scoping is the failure actually observed here; case 6 isolates the safety-stock trap on a supplier that has only one part."
+    },
+    "model_response": {
+      "affected_orders": [
+        "SO-4001",
+        "SO-4003"
+      ],
+      "severity": "high",
+      "revenue_at_risk_usd": 2630000,
+      "reasoning": "Meridian Electronics' production delay on P-1050 cascades to P-1010 (both from SUP-001). Pooled demand for P-1010 across SO-4001 and SO-4003 is 290 units, but only 120 units are available on-hand. The earliest due date is 2026-08-21, and SUP-001 (the only supplier) is disrupted and cannot deliver in time, resulting in high severity."
+    },
+    "model": "claude-haiku-4-5-20251001",
+    "usage": {
+      "input_tokens": 2599,
+      "output_tokens": 725
+    },
+    "timing": {
+      "prompt_build_ms": 0.2,
+      "api_call_ms": 6327.2,
+      "parse_ms": 0.1,
+      "total_ms": 6327.4,
+      "output_tokens_per_sec": 114.6
     }
   },
   {
     "case_id": "case-6",
+    "run_index": 0,
     "scenario": "Ferreira Hydraulics reports a production delay on the hydraulic manifold.",
     "golden_answer": {
       "affected_orders": [],
@@ -172,19 +844,143 @@
       "affected_orders": [],
       "severity": "none",
       "revenue_at_risk_usd": 0,
-      "reasoning": "P-1060 (hydraulic manifold) has 400 units on hand against a single open order requiring 150 units. The available supply exceeds demand, so no shortfall exists despite the Ferreira Hydraulics production delay."
+      "reasoning": "P-1060 has 400 units on hand against only 150 units of pooled demand (SO-4010). The available inventory is sufficient to meet the due date without relying on new supply from the disrupted Ferreira Hydraulics, so no orders are affected."
     },
     "model": "claude-haiku-4-5-20251001",
     "usage": {
       "input_tokens": 2602,
-      "output_tokens": 372
+      "output_tokens": 400
     },
     "timing": {
       "prompt_build_ms": 0.2,
-      "api_call_ms": 4156.6,
+      "api_call_ms": 4711.3,
       "parse_ms": 0.1,
-      "total_ms": 4156.8,
-      "output_tokens_per_sec": 89.5
+      "total_ms": 4711.5,
+      "output_tokens_per_sec": 84.9
+    }
+  },
+  {
+    "case_id": "case-6",
+    "run_index": 1,
+    "scenario": "Ferreira Hydraulics reports a production delay on the hydraulic manifold.",
+    "golden_answer": {
+      "affected_orders": [],
+      "severity": "none",
+      "revenue_at_risk_usd": 0,
+      "reasoning": "P-1060 available supply is on-hand (400) + in-transit (0) = 400 against pooled demand of 150 (SO-4010 alone), so the delay creates no shortfall. Isolated safety-stock control: Ferreira supplies only P-1060, so no other part can be mistaken for it, and deducting safety_stock (300) would leave 100 available, a false 50-unit shortfall, and wrongly give high / SO-4010 / 540000."
+    },
+    "model_response": {
+      "affected_orders": [],
+      "severity": "none",
+      "revenue_at_risk_usd": 0,
+      "reasoning": "P-1060 has 400 units on-hand against total pooled demand of only 150 units. The production delay at Ferreira Hydraulics does not create a shortfall because current inventory fully covers all open orders for this part."
+    },
+    "model": "claude-haiku-4-5-20251001",
+    "usage": {
+      "input_tokens": 2602,
+      "output_tokens": 459
+    },
+    "timing": {
+      "prompt_build_ms": 0.1,
+      "api_call_ms": 4713.7,
+      "parse_ms": 0.1,
+      "total_ms": 4713.8,
+      "output_tokens_per_sec": 97.4
+    }
+  },
+  {
+    "case_id": "case-6",
+    "run_index": 2,
+    "scenario": "Ferreira Hydraulics reports a production delay on the hydraulic manifold.",
+    "golden_answer": {
+      "affected_orders": [],
+      "severity": "none",
+      "revenue_at_risk_usd": 0,
+      "reasoning": "P-1060 available supply is on-hand (400) + in-transit (0) = 400 against pooled demand of 150 (SO-4010 alone), so the delay creates no shortfall. Isolated safety-stock control: Ferreira supplies only P-1060, so no other part can be mistaken for it, and deducting safety_stock (300) would leave 100 available, a false 50-unit shortfall, and wrongly give high / SO-4010 / 540000."
+    },
+    "model_response": {
+      "affected_orders": [],
+      "severity": "none",
+      "revenue_at_risk_usd": 0,
+      "reasoning": "P-1060 has 400 units on hand against pooled demand of 150 units for SO-4010. Current inventory fully covers the order due by 2026-08-20, so the supplier delay does not create a shortfall."
+    },
+    "model": "claude-haiku-4-5-20251001",
+    "usage": {
+      "input_tokens": 2602,
+      "output_tokens": 530
+    },
+    "timing": {
+      "prompt_build_ms": 0.1,
+      "api_call_ms": 5870.7,
+      "parse_ms": 0.1,
+      "total_ms": 5870.9,
+      "output_tokens_per_sec": 90.3
+    }
+  },
+  {
+    "case_id": "case-6",
+    "run_index": 3,
+    "scenario": "Ferreira Hydraulics reports a production delay on the hydraulic manifold.",
+    "golden_answer": {
+      "affected_orders": [],
+      "severity": "none",
+      "revenue_at_risk_usd": 0,
+      "reasoning": "P-1060 available supply is on-hand (400) + in-transit (0) = 400 against pooled demand of 150 (SO-4010 alone), so the delay creates no shortfall. Isolated safety-stock control: Ferreira supplies only P-1060, so no other part can be mistaken for it, and deducting safety_stock (300) would leave 100 available, a false 50-unit shortfall, and wrongly give high / SO-4010 / 540000."
+    },
+    "model_response": {
+      "affected_orders": [
+        "SO-4001",
+        "SO-4003",
+        "SO-4004",
+        "SO-4005",
+        "SO-4007",
+        "SO-4008",
+        "SO-4009"
+      ],
+      "severity": "high",
+      "revenue_at_risk_usd": 8820000,
+      "reasoning": "The Ferreira Hydraulics disruption does not directly affect P-1060 orders due to adequate inventory, but the analysis reveals three parts with demand-supply shortfalls: P-1010 has a critical shortfall with no on-time supplier recourse (high severity), P-1020 has a shortfall but SUP-002 can deliver in 21 days before the earliest due date (medium), and P-1030 has a shortfall but SUP-004 can deliver in 28 days before the earliest due date (low). The overall severity is determined by the highest-risk part."
+    },
+    "model": "claude-haiku-4-5-20251001",
+    "usage": {
+      "input_tokens": 2602,
+      "output_tokens": 1084
+    },
+    "timing": {
+      "prompt_build_ms": 0.2,
+      "api_call_ms": 9316.4,
+      "parse_ms": 0.1,
+      "total_ms": 9316.6,
+      "output_tokens_per_sec": 116.4
+    }
+  },
+  {
+    "case_id": "case-6",
+    "run_index": 4,
+    "scenario": "Ferreira Hydraulics reports a production delay on the hydraulic manifold.",
+    "golden_answer": {
+      "affected_orders": [],
+      "severity": "none",
+      "revenue_at_risk_usd": 0,
+      "reasoning": "P-1060 available supply is on-hand (400) + in-transit (0) = 400 against pooled demand of 150 (SO-4010 alone), so the delay creates no shortfall. Isolated safety-stock control: Ferreira supplies only P-1060, so no other part can be mistaken for it, and deducting safety_stock (300) would leave 100 available, a false 50-unit shortfall, and wrongly give high / SO-4010 / 540000."
+    },
+    "model_response": {
+      "affected_orders": [],
+      "severity": "none",
+      "revenue_at_risk_usd": 0,
+      "reasoning": "P-1060 has 400 units available (on_hand + in_transit) against pooled demand of 150 units across all open orders. Current inventory covers the shortfall, so the production delay at Ferreira Hydraulics does not disrupt fulfillment."
+    },
+    "model": "claude-haiku-4-5-20251001",
+    "usage": {
+      "input_tokens": 2602,
+      "output_tokens": 513
+    },
+    "timing": {
+      "prompt_build_ms": 0.1,
+      "api_call_ms": 5441.4,
+      "parse_ms": 0.0,
+      "total_ms": 5441.5,
+      "output_tokens_per_sec": 94.3
     }
   }
 ]

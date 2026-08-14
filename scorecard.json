@@ -1,104 +1,594 @@
-[
-  {
-    "case_id": "case-1",
-    "order_id_scores": {
-      "precision": 1.0,
-      "recall": 1.0,
-      "f1": 1.0
+{
+  "by_case": [
+    {
+      "case_id": "case-1",
+      "runs": 5,
+      "parse_errors": 0,
+      "graded_runs": 5,
+      "f1_mean": 1.0,
+      "f1_min": 1.0,
+      "f1_max": 1.0,
+      "revenue_pass": 5,
+      "no_hallucination_pass": 5,
+      "severity_pass": 5,
+      "stable": true
     },
-    "revenue_scores": {
-      "pass": true,
-      "pct_off": 0.0
+    {
+      "case_id": "case-2",
+      "runs": 5,
+      "parse_errors": 0,
+      "graded_runs": 5,
+      "f1_mean": 1.0,
+      "f1_min": 1.0,
+      "f1_max": 1.0,
+      "revenue_pass": 5,
+      "no_hallucination_pass": 5,
+      "severity_pass": 5,
+      "stable": true
     },
-    "hallucination_scores": {
-      "hallucinated_ids": [],
-      "pass": true
+    {
+      "case_id": "case-3",
+      "runs": 5,
+      "parse_errors": 0,
+      "graded_runs": 5,
+      "f1_mean": 1.0,
+      "f1_min": 1.0,
+      "f1_max": 1.0,
+      "revenue_pass": 5,
+      "no_hallucination_pass": 5,
+      "severity_pass": 5,
+      "stable": true
     },
-    "severity_match": true
-  },
-  {
-    "case_id": "case-2",
-    "order_id_scores": {
-      "precision": 1.0,
-      "recall": 1.0,
-      "f1": 1.0
+    {
+      "case_id": "case-4",
+      "runs": 5,
+      "parse_errors": 0,
+      "graded_runs": 5,
+      "f1_mean": 1.0,
+      "f1_min": 1.0,
+      "f1_max": 1.0,
+      "revenue_pass": 5,
+      "no_hallucination_pass": 5,
+      "severity_pass": 5,
+      "stable": true
     },
-    "revenue_scores": {
-      "pass": true,
-      "pct_off": 0.0
+    {
+      "case_id": "case-5",
+      "runs": 5,
+      "parse_errors": 0,
+      "graded_runs": 5,
+      "f1_mean": 1.0,
+      "f1_min": 1.0,
+      "f1_max": 1.0,
+      "revenue_pass": 5,
+      "no_hallucination_pass": 5,
+      "severity_pass": 5,
+      "stable": true
     },
-    "hallucination_scores": {
-      "hallucinated_ids": [],
-      "pass": true
+    {
+      "case_id": "case-6",
+      "runs": 5,
+      "parse_errors": 0,
+      "graded_runs": 5,
+      "f1_mean": 1.0,
+      "f1_min": 1.0,
+      "f1_max": 1.0,
+      "revenue_pass": 5,
+      "no_hallucination_pass": 5,
+      "severity_pass": 5,
+      "stable": true
+    }
+  ],
+  "runs": [
+    {
+      "case_id": "case-1",
+      "order_id_scores": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "revenue_scores": {
+        "pass": true,
+        "pct_off": 0.0
+      },
+      "hallucination_scores": {
+        "hallucinated_ids": [],
+        "pass": true
+      },
+      "severity_match": true
     },
-    "severity_match": true
-  },
-  {
-    "case_id": "case-3",
-    "order_id_scores": {
-      "precision": 1.0,
-      "recall": 1.0,
-      "f1": 1.0
+    {
+      "case_id": "case-1",
+      "order_id_scores": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "revenue_scores": {
+        "pass": true,
+        "pct_off": 0.0
+      },
+      "hallucination_scores": {
+        "hallucinated_ids": [],
+        "pass": true
+      },
+      "severity_match": true
     },
-    "revenue_scores": {
-      "pass": true,
-      "pct_off": 0.0
+    {
+      "case_id": "case-1",
+      "order_id_scores": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "revenue_scores": {
+        "pass": true,
+        "pct_off": 0.0
+      },
+      "hallucination_scores": {
+        "hallucinated_ids": [],
+        "pass": true
+      },
+      "severity_match": true
     },
-    "hallucination_scores": {
-      "hallucinated_ids": [],
-      "pass": true
+    {
+      "case_id": "case-1",
+      "order_id_scores": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "revenue_scores": {
+        "pass": true,
+        "pct_off": 0.0
+      },
+      "hallucination_scores": {
+        "hallucinated_ids": [],
+        "pass": true
+      },
+      "severity_match": true
     },
-    "severity_match": true
-  },
-  {
-    "case_id": "case-4",
-    "order_id_scores": {
-      "precision": 1.0,
-      "recall": 1.0,
-      "f1": 1.0
+    {
+      "case_id": "case-1",
+      "order_id_scores": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "revenue_scores": {
+        "pass": true,
+        "pct_off": 0.0
+      },
+      "hallucination_scores": {
+        "hallucinated_ids": [],
+        "pass": true
+      },
+      "severity_match": true
     },
-    "revenue_scores": {
-      "pass": true,
-      "pct_off": 0.0
+    {
+      "case_id": "case-2",
+      "order_id_scores": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "revenue_scores": {
+        "pass": true,
+        "pct_off": 0.0
+      },
+      "hallucination_scores": {
+        "hallucinated_ids": [],
+        "pass": true
+      },
+      "severity_match": true
     },
-    "hallucination_scores": {
-      "hallucinated_ids": [],
-      "pass": true
+    {
+      "case_id": "case-2",
+      "order_id_scores": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "revenue_scores": {
+        "pass": true,
+        "pct_off": 0.0
+      },
+      "hallucination_scores": {
+        "hallucinated_ids": [],
+        "pass": true
+      },
+      "severity_match": true
     },
-    "severity_match": true
-  },
-  {
-    "case_id": "case-5",
-    "order_id_scores": {
-      "precision": 1.0,
-      "recall": 1.0,
-      "f1": 1.0
+    {
+      "case_id": "case-2",
+      "order_id_scores": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "revenue_scores": {
+        "pass": true,
+        "pct_off": 0.0
+      },
+      "hallucination_scores": {
+        "hallucinated_ids": [],
+        "pass": true
+      },
+      "severity_match": true
     },
-    "revenue_scores": {
-      "pass": true,
-      "pct_off": 0.0
+    {
+      "case_id": "case-2",
+      "order_id_scores": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "revenue_scores": {
+        "pass": true,
+        "pct_off": 0.0
+      },
+      "hallucination_scores": {
+        "hallucinated_ids": [],
+        "pass": true
+      },
+      "severity_match": true
     },
-    "hallucination_scores": {
-      "hallucinated_ids": [],
-      "pass": true
+    {
+      "case_id": "case-2",
+      "order_id_scores": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "revenue_scores": {
+        "pass": true,
+        "pct_off": 0.0
+      },
+      "hallucination_scores": {
+        "hallucinated_ids": [],
+        "pass": true
+      },
+      "severity_match": true
     },
-    "severity_match": true
-  },
-  {
-    "case_id": "case-6",
-    "order_id_scores": {
-      "precision": 1.0,
-      "recall": 1.0,
-      "f1": 1.0
+    {
+      "case_id": "case-3",
+      "order_id_scores": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "revenue_scores": {
+        "pass": true,
+        "pct_off": 0.0
+      },
+      "hallucination_scores": {
+        "hallucinated_ids": [],
+        "pass": true
+      },
+      "severity_match": true
     },
-    "revenue_scores": {
-      "pass": true,
-      "pct_off": 0.0
+    {
+      "case_id": "case-3",
+      "order_id_scores": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "revenue_scores": {
+        "pass": true,
+        "pct_off": 0.0
+      },
+      "hallucination_scores": {
+        "hallucinated_ids": [],
+        "pass": true
+      },
+      "severity_match": true
     },
-    "hallucination_scores": {
-      "hallucinated_ids": [],
-      "pass": true
+    {
+      "case_id": "case-3",
+      "order_id_scores": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "revenue_scores": {
+        "pass": true,
+        "pct_off": 0.0
+      },
+      "hallucination_scores": {
+        "hallucinated_ids": [],
+        "pass": true
+      },
+      "severity_match": true
     },
-    "severity_match": true
-  }
-]
+    {
+      "case_id": "case-3",
+      "order_id_scores": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "revenue_scores": {
+        "pass": true,
+        "pct_off": 0.0
+      },
+      "hallucination_scores": {
+        "hallucinated_ids": [],
+        "pass": true
+      },
+      "severity_match": true
+    },
+    {
+      "case_id": "case-3",
+      "order_id_scores": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "revenue_scores": {
+        "pass": true,
+        "pct_off": 0.0
+      },
+      "hallucination_scores": {
+        "hallucinated_ids": [],
+        "pass": true
+      },
+      "severity_match": true
+    },
+    {
+      "case_id": "case-4",
+      "order_id_scores": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "revenue_scores": {
+        "pass": true,
+        "pct_off": 0.0
+      },
+      "hallucination_scores": {
+        "hallucinated_ids": [],
+        "pass": true
+      },
+      "severity_match": true
+    },
+    {
+      "case_id": "case-4",
+      "order_id_scores": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "revenue_scores": {
+        "pass": true,
+        "pct_off": 0.0
+      },
+      "hallucination_scores": {
+        "hallucinated_ids": [],
+        "pass": true
+      },
+      "severity_match": true
+    },
+    {
+      "case_id": "case-4",
+      "order_id_scores": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "revenue_scores": {
+        "pass": true,
+        "pct_off": 0.0
+      },
+      "hallucination_scores": {
+        "hallucinated_ids": [],
+        "pass": true
+      },
+      "severity_match": true
+    },
+    {
+      "case_id": "case-4",
+      "order_id_scores": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "revenue_scores": {
+        "pass": true,
+        "pct_off": 0.0
+      },
+      "hallucination_scores": {
+        "hallucinated_ids": [],
+        "pass": true
+      },
+      "severity_match": true
+    },
+    {
+      "case_id": "case-4",
+      "order_id_scores": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "revenue_scores": {
+        "pass": true,
+        "pct_off": 0.0
+      },
+      "hallucination_scores": {
+        "hallucinated_ids": [],
+        "pass": true
+      },
+      "severity_match": true
+    },
+    {
+      "case_id": "case-5",
+      "order_id_scores": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "revenue_scores": {
+        "pass": true,
+        "pct_off": 0.0
+      },
+      "hallucination_scores": {
+        "hallucinated_ids": [],
+        "pass": true
+      },
+      "severity_match": true
+    },
+    {
+      "case_id": "case-5",
+      "order_id_scores": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "revenue_scores": {
+        "pass": true,
+        "pct_off": 0.0
+      },
+      "hallucination_scores": {
+        "hallucinated_ids": [],
+        "pass": true
+      },
+      "severity_match": true
+    },
+    {
+      "case_id": "case-5",
+      "order_id_scores": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "revenue_scores": {
+        "pass": true,
+        "pct_off": 0.0
+      },
+      "hallucination_scores": {
+        "hallucinated_ids": [],
+        "pass": true
+      },
+      "severity_match": true
+    },
+    {
+      "case_id": "case-5",
+      "order_id_scores": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "revenue_scores": {
+        "pass": true,
+        "pct_off": 0.0
+      },
+      "hallucination_scores": {
+        "hallucinated_ids": [],
+        "pass": true
+      },
+      "severity_match": true
+    },
+    {
+      "case_id": "case-5",
+      "order_id_scores": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "revenue_scores": {
+        "pass": true,
+        "pct_off": 0.0
+      },
+      "hallucination_scores": {
+        "hallucinated_ids": [],
+        "pass": true
+      },
+      "severity_match": true
+    },
+    {
+      "case_id": "case-6",
+      "order_id_scores": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "revenue_scores": {
+        "pass": true,
+        "pct_off": 0.0
+      },
+      "hallucination_scores": {
+        "hallucinated_ids": [],
+        "pass": true
+      },
+      "severity_match": true
+    },
+    {
+      "case_id": "case-6",
+      "order_id_scores": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "revenue_scores": {
+        "pass": true,
+        "pct_off": 0.0
+      },
+      "hallucination_scores": {
+        "hallucinated_ids": [],
+        "pass": true
+      },
+      "severity_match": true
+    },
+    {
+      "case_id": "case-6",
+      "order_id_scores": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "revenue_scores": {
+        "pass": true,
+        "pct_off": 0.0
+      },
+      "hallucination_scores": {
+        "hallucinated_ids": [],
+        "pass": true
+      },
+      "severity_match": true
+    },
+    {
+      "case_id": "case-6",
+      "order_id_scores": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "revenue_scores": {
+        "pass": true,
+        "pct_off": 0.0
+      },
+      "hallucination_scores": {
+        "hallucinated_ids": [],
+        "pass": true
+      },
+      "severity_match": true
+    },
+    {
+      "case_id": "case-6",
+      "order_id_scores": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "revenue_scores": {
+        "pass": true,
+        "pct_off": 0.0
+      },
+      "hallucination_scores": {
+        "hallucinated_ids": [],
+        "pass": true
+      },
+      "severity_match": true
+    }
+  ]
+}

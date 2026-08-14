@@ -84,23 +84,39 @@ def build_actual_table():
 
 
 def build_hypothetical_table(results_path="results.json"):
-    """Take one run's actual token counts and price them at every model's
-    rate, to give a fast (approximate) cross-model estimate."""
+    """Price ONE pass over the suite at every model's rate, for a fast
+    (approximate) cross-model estimate.
+
+    results.json holds RUNS_PER_CASE records per case, so token counts are
+    averaged across a case's runs first. Without that the totals would silently
+    be the cost of the whole sampled sweep while still reading as per-case."""
     with open(results_path) as f:
         cases = json.load(f)
 
-    rows = []
+    # case_id -> summed tokens + run count, so we can take the mean per case.
+    totals = {}
     for case in cases:
         usage = case.get("usage")
         if not usage:
             continue
+        acc = totals.setdefault(case["case_id"], {"input": 0, "output": 0, "runs": 0})
+        acc["input"] += usage["input_tokens"]
+        acc["output"] += usage["output_tokens"]
+        acc["runs"] += 1
+
+    rows = []
+    for case_id, acc in totals.items():
+        usage = {
+            "input_tokens": round(acc["input"] / acc["runs"]),
+            "output_tokens": round(acc["output"] / acc["runs"]),
+        }
         for model, rates in PRICING_PER_MTOK.items():
             input_cost, output_cost = cost_for(
                 model, usage["input_tokens"], usage["output_tokens"]
             )
             rows.append(
                 {
-                    "case_id": case["case_id"],
+                    "case_id": case_id,
                     "model": model,
                     "input_tokens": usage["input_tokens"],
                     "output_tokens": usage["output_tokens"],
@@ -128,8 +144,9 @@ def main():
 
     print()
     print("=" * 70)
-    print("HYPOTHETICAL cost if results.json's token counts were billed at")
-    print("each model's rate (approximation -- see docstring)")
+    print("HYPOTHETICAL cost of ONE pass over the suite at each model's rate,")
+    print("from results.json's token counts averaged per case across its runs")
+    print("(approximation -- see docstring)")
     print("=" * 70)
     hypothetical = build_hypothetical_table()
     if not hypothetical.empty:

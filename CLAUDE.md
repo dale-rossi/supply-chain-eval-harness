@@ -18,12 +18,16 @@ There is no test suite, linter, or build step. Everything runs through the local
 source venv/bin/activate
 export ANTHROPIC_API_KEY=sk-ant-...
 
-python runner.py                              # calls the API for all 4 cases -> results.json
+python runner.py                              # 6 cases x 5 runs = 30 API calls -> results.json
 python report.py                              # grades results.json -> scorecard.json + table
 python cost_analysis.py                       # -> cost_actual.csv, cost_hypothetical.csv
 
 HARNESS_MODEL=claude-haiku-4-5-20251001 python runner.py   # run a different model
+HARNESS_RUNS_PER_CASE=1 python runner.py                   # single run per case (fast/cheap)
 ```
+
+A full sweep of both models at 5 runs each is 60 calls, about $0.67 and ~12 minutes. Drop
+`HARNESS_RUNS_PER_CASE` to 1 while iterating on a prompt or fixture.
 
 Every script uses relative paths (`data/`, `results*.json`) — **run them from the repo root**, not
 from a subdirectory.
@@ -52,6 +56,16 @@ per-model archive) and `results.json` (a copy of the most recent run). `report.p
 `results.json` separately for the hypothetical cross-model table — so the underscore-prefixed name
 is what makes multi-model cost comparison work, and re-running the same model overwrites its
 archive.
+
+**Sampling is per (case, run), and a single run is not evidence.** `RUNS_PER_CASE` in `runner.py`
+defaults to 5, temperature is left at the API default, and `results.json` holds one flat record per
+(case, run) tagged with `run_index` — not one per case. `report.py` aggregates by `case_id` into a
+mean F1 plus `k/n` counts, and its **Stable** column flags cases whose runs disagreed. That column
+is the reason sampling exists: at one run per case both models looked like a clean 6/6, but at five
+Haiku is unstable on three of six cases (case-4 `low` instead of `medium` twice, case-5 twice,
+case-6 once) while Sonnet holds 6/6. Any claim about a model based on a single run is a coin flip
+dressed as a result. `scorecard.json` is correspondingly `{"by_case": [...], "runs": [...]}`, not a
+flat list.
 
 **Parse failures are data, not exceptions.** `extract_json` in `runner.py` tries bare JSON, then a
 fenced `json` block, then the last `{` in the text. If all three fail it stores
