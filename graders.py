@@ -11,11 +11,17 @@ def grade_order_ids(golden_ids, predicted_ids):
     fp = len(pred_set - golden_set) # predicted but shouldn't be
     fn = len(golden_set - pred_set) # should be but wasn't predicted
  
-    precision = tp / (tp + fp) if (tp + fp) else 1.0
-    recall = tp / (tp + fn) if (tp + fn) else 1.0
-    # Fallback is 0.0, not 1.0: the sum is only ever 0 when tp == 0 against a
-    # non-empty golden, i.e. a total miss. Two empty sets already give 1.0 here.
-    f1 = 2 * precision * recall / (precision + recall) if (precision + recall) else 0.0
+    if not golden_set and not pred_set:
+        # Correctly predicting nothing is the only case that earns a perfect score.
+        precision = recall = f1 = 1.0
+    else:
+        # Past this point every zero denominator means a wrong answer, so each
+        # falls back to 0.0. Returning 1.0 for an undefined ratio reads as success:
+        # an empty prediction against a non-empty golden would show precision 1.0,
+        # and a non-empty prediction against an empty golden would show recall 1.0.
+        precision = tp / (tp + fp) if (tp + fp) else 0.0
+        recall = tp / (tp + fn) if (tp + fn) else 0.0
+        f1 = 2 * precision * recall / (precision + recall) if (precision + recall) else 0.0
 
     return {
         "precision": round(precision, 2),

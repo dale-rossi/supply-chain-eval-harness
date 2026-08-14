@@ -90,17 +90,16 @@ These are judgment calls baked into the golden answers, not derivable from the d
   branch returns `pct_off: None` to mean undefined.
 - **Hallucination** means citing an order ID absent from `supply_chain.json` entirely — distinct
   from citing a real-but-wrong ID, which precision/recall already penalizes.
-- **Empty sets score 1.0 by convention** in `grade_order_ids` (the `if (tp + fp)` / `if (tp + fn)`
-  guards). That's what lets cases 3 and 5 earn a perfect score for correctly predicting nothing,
-  but it also means an empty prediction against a non-empty golden gets a vacuous
-  `precision: 1.0` — never read precision in isolation.
-- **F1's fallback is `0.0`, and that branch is reachable only on a total miss.** When a prediction
-  is disjoint from a non-empty golden, `tp` is 0, so precision and recall are both 0 and their sum
-  is 0. It returned `1.0` until 2026-08-14, which scored an entirely wrong order set as perfect and
-  left cases 1, 2 and 4 (the non-empty goldens) silently unguarded. The empty-set convention never
-  needed that branch — two empty sets send both guards to 1.0, so F1 evaluates to 1.0 on its own.
-  So F1 is the column to trust, but only because of this fix; the earlier note claiming F1 was
-  trustworthy predated it and was wrong.
+- **Only a both-empty comparison scores 1.0** in `grade_order_ids`. Correctly predicting nothing is
+  a perfect score — cases 3 and 5 depend on it — so it is special-cased ahead of the ratios. Past
+  that branch every zero denominator means a wrong answer and returns `0.0`, which is what makes
+  all three columns independently readable. Two earlier conventions were wrong and both are gone
+  as of 2026-08-14: F1 returned `1.0` whenever a prediction was disjoint from a non-empty golden,
+  scoring a total miss as perfect and leaving cases 1, 2 and 4 unguarded; and precision/recall each
+  returned `1.0` for their own undefined case, so an empty prediction against a non-empty golden
+  read `precision: 1.0`, and a non-empty prediction against an empty golden read `recall: 1.0`.
+  That last one is not hypothetical — it is what Haiku's failed case-5 run scored before the fix.
+  Don't reintroduce a `1.0` fallback for an undefined ratio; vacuous truth reads as success.
 - **`severity` counts suppliers that can beat the deadline.** `graders.py` scores it as an exact
   string match against these bands, which `SYSTEM_PROMPT` states verbatim: `none` = available
   supply (`on_hand + in_transit`) meets pooled demand, so no shortfall; otherwise count the
