@@ -15,6 +15,8 @@ harness and the prompt rather than in the models.
 > supplier, or commercial relationship, and none of the numbers should be treated as
 > reflecting real-world logistics.
 
+![Harness flow](docs/harness-flow.svg)
+
 This harness — code, fixtures, and documentation — was built with
 [Claude Code](https://claude.com/claude-code).
 
