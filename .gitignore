@@ -3,3 +3,6 @@ __pycache__/
 *.pyc
 .env
 .DS_Store
+
+# Local working notes -- deliberately not published
+harness-and-evals-onepager.md

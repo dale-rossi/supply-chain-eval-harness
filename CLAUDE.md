@@ -5,8 +5,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## What this is
 
 A from-scratch (no eval framework) harness that scores Claude on a supply-chain risk-analysis
-prompt against four hand-derived golden answers. `harness-and-evals-onepager.md` is the design
-document behind it and tracks the build phases; `README.md` covers the same ground for a reader.
+prompt against seven hand-derived golden answers. `README.md` is the reference document for both
+readers and agents, and is the only place the design is written down.
+`harness-and-evals-onepager.md` is the owner's local working notes: gitignored and untracked, so
+don't assume it exists or edit it as part of repo work.
 
 ## Commands
 
@@ -73,8 +75,8 @@ fenced `json` block, then the last `{` in the text. If all three fail it stores
 prints `PARSE ERROR` for the row. Keep that contract when changing any of the three.
 
 **`runner.py` records per-case timing that nothing reads yet** (`prompt_build_ms`, `api_call_ms`,
-`parse_ms`, `total_ms`, `output_tokens_per_sec`). It's staged for the Phase 2 latency comparison in
-`harness-and-evals-onepager.md` — don't strip it as dead weight.
+`parse_ms`, `total_ms`, `output_tokens_per_sec`). Nothing in the pipeline consumes it, but the
+README's median-latency figures are computed from it ad hoc — don't strip it as dead weight.
 
 **`cost_analysis.py` silently skips cases** whose `model` isn't a key in `PRICING_PER_MTOK`. That
 table is maintained by hand from published pricing and carries dated caveats in its comments

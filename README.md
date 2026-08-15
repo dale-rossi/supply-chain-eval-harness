@@ -1,4 +1,4 @@
-# Supply Chain Eval Harness
+# LLM Evaluation Harness for Manufacturing Supply Chain
 
 A small, dependency-light evaluation harness that scores Claude models on a structured
 supply-chain risk-analysis task. Each test case presents a disruption scenario against a
@@ -97,6 +97,25 @@ count per boolean column, and a **Stable** flag. Writes `scorecard.json` as
 prices one run-averaged pass over the suite at every model's published rate. That pricing
 table is maintained by hand and carries dated caveats; cross-model-family estimates are
 approximate because tokenizers differ.
+
+### Portability
+
+The scoring layer is provider-agnostic. `graders.py` has no imports at all — it is pure set and
+numeric comparison over dictionaries — and `report.py` imports only `json` and the graders. The
+fixtures in `data/` are plain JSON describing a task, with nothing model- or vendor-specific in
+them. None of that would need to change to score a different model.
+
+`HARNESS_MODEL` swaps between Claude models, and that is the extent of what works today.
+
+Pointing the harness at an open-weights model served by vLLM or Ollama has **not** been done.
+It would take replacing the client in `runner.py` — `from anthropic import Anthropic` and the
+`client.messages.create(...)` call are the only provider-specific code in the repo — with a call
+against an OpenAI-compatible endpoint, then mapping that response's text and token counts into
+the same record shape the graders already expect. `cost_analysis.py` would also need a
+`PRICING_PER_MTOK` entry for the new model, since it silently skips any model missing from that
+table. The `extract_json` fallback chain — bare JSON, fenced block, last `{` — already assumes a
+model may wrap its output in prose, which is the usual friction when moving a structured-output
+prompt to a model not tuned for it.
 
 ## The graders
 
