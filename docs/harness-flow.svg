@@ -1,0 +1,107 @@
+<svg viewBox="0 0 1060 640" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="a" markerWidth="9" markerHeight="7" refX="8.5" refY="3.5" orient="auto">
+      <path d="M0,0 L9,3.5 L0,7 Z" fill="#7d6b5d"/>
+    </marker>
+    <marker id="ad" markerWidth="9" markerHeight="7" refX="8.5" refY="3.5" orient="auto">
+      <path d="M0,0 L9,3.5 L0,7 Z" fill="#a89c91"/>
+    </marker>
+  </defs>
+
+  <rect width="1060" height="640" fill="#ffffff"/>
+
+  <!-- ================= STAGE LABELS ================= -->
+  <text x="50" y="34" font-size="12" font-weight="700" fill="#a89c91" letter-spacing="1.6">1 · INPUTS</text>
+  <text x="350" y="34" font-size="12" font-weight="700" fill="#a89c91" letter-spacing="1.6">2 · PROMPT</text>
+  <text x="690" y="34" font-size="12" font-weight="700" fill="#a89c91" letter-spacing="1.6">3 · MODEL</text>
+  <text x="350" y="368" font-size="12" font-weight="700" fill="#a89c91" letter-spacing="1.6">4 · SCORING</text>
+
+  <!-- ================= INPUTS ================= -->
+  <rect x="50" y="48" width="240" height="128" rx="7" fill="#fdfaf7" stroke="#d4a27f" stroke-width="2"/>
+  <text x="68" y="72" font-size="14.5" font-weight="700" fill="#1a1a1a" font-family="ui-monospace, monospace">test_cases.json</text>
+  <line x1="68" y1="82" x2="272" y2="82" stroke="#eee5dc"/>
+  <text x="68" y="104" font-size="13.5" fill="#333" font-family="ui-monospace, monospace">scenario</text>
+  <text x="163" y="104" font-size="12.5" fill="#4a8055">sent to model</text>
+  <text x="68" y="128" font-size="13.5" fill="#333" font-family="ui-monospace, monospace">golden_answer</text>
+  <text x="184" y="128" font-size="12.5" fill="#b4503f">never sent</text>
+  <text x="68" y="158" font-size="12.5" fill="#8a7a6d" font-style="italic">one entry per test case</text>
+
+  <rect x="50" y="196" width="240" height="112" rx="7" fill="#fdfaf7" stroke="#d4a27f" stroke-width="2"/>
+  <text x="68" y="220" font-size="14.5" font-weight="700" fill="#1a1a1a" font-family="ui-monospace, monospace">supply_chain.json</text>
+  <line x1="68" y1="230" x2="272" y2="230" stroke="#eee5dc"/>
+  <text x="68" y="252" font-size="13" fill="#333">suppliers · parts · inventory · orders</text>
+  <text x="68" y="276" font-size="12.5" fill="#4a8055">sent in full, every call</text>
+  <text x="68" y="296" font-size="12.5" fill="#8a7a6d" font-style="italic">fabricated test data</text>
+
+  <path d="M292,112 L344,112" fill="none" stroke="#7d6b5d" stroke-width="2" marker-end="url(#a)"/>
+  <path d="M292,252 L318,252 L318,150 L344,150" fill="none" stroke="#7d6b5d" stroke-width="2" marker-end="url(#a)"/>
+
+  <!-- ================= PROMPT ================= -->
+  <rect x="350" y="48" width="280" height="260" rx="7" fill="#f6f1eb" stroke="#7d6b5d" stroke-width="2"/>
+  <text x="370" y="74" font-size="15" font-weight="700" fill="#1a1a1a" font-family="ui-monospace, monospace">runner.py</text>
+  <text x="370" y="96" font-size="12.5" fill="#6b6058">assembles one prompt per case</text>
+
+  <rect x="370" y="110" width="240" height="46" rx="4" fill="#ffffff" stroke="#e4dad0"/>
+  <text x="384" y="130" font-size="12.5" fill="#1a1a1a" font-family="ui-monospace, monospace">SYSTEM_PROMPT</text>
+  <text x="384" y="147" font-size="11.5" fill="#8a7a6d">the severity rubric</text>
+  <text x="556" y="130" font-size="11" font-weight="700" fill="#7d6b5d">FIXED</text>
+
+  <rect x="370" y="164" width="240" height="46" rx="4" fill="#ffffff" stroke="#e4dad0"/>
+  <text x="384" y="184" font-size="12.5" fill="#1a1a1a" font-family="ui-monospace, monospace">supply_chain.json</text>
+  <text x="384" y="201" font-size="11.5" fill="#8a7a6d">the whole dataset</text>
+  <text x="556" y="184" font-size="11" font-weight="700" fill="#7d6b5d">FIXED</text>
+
+  <rect x="370" y="218" width="240" height="46" rx="4" fill="#ffffff" stroke="#c9a68a" stroke-width="1.5"/>
+  <text x="384" y="238" font-size="12.5" fill="#1a1a1a" font-family="ui-monospace, monospace">scenario</text>
+  <text x="384" y="255" font-size="11.5" fill="#8a7a6d">one sentence</text>
+  <text x="551" y="238" font-size="11" font-weight="700" fill="#b4503f">VARIES</text>
+
+  <text x="370" y="290" font-size="12" fill="#6b6058">≈2,340 input tokens, flat across all cases</text>
+
+  <path d="M632,133 L684,133" fill="none" stroke="#7d6b5d" stroke-width="2" marker-end="url(#a)"/>
+
+  <!-- ================= MODEL ================= -->
+  <rect x="690" y="48" width="280" height="96" rx="7" fill="#2b2724" stroke="#1a1a1a" stroke-width="2"/>
+  <text x="830" y="84" font-size="16" font-weight="700" fill="#ffffff" text-anchor="middle">Claude API</text>
+  <text x="830" y="107" font-size="12.5" fill="#c4bab1" text-anchor="middle">the model under test</text>
+  <text x="830" y="126" font-size="12" fill="#e0a882" text-anchor="middle">sees only the three boxes at left</text>
+
+  <path d="M830,146 L830,374" fill="none" stroke="#7d6b5d" stroke-width="2" marker-end="url(#a)"/>
+
+  <rect x="690" y="376" width="280" height="152" rx="7" fill="#fdfaf7" stroke="#d4a27f" stroke-width="2"/>
+  <text x="710" y="400" font-size="14.5" font-weight="700" fill="#1a1a1a" font-family="ui-monospace, monospace">model_response</text>
+  <line x1="710" y1="410" x2="952" y2="410" stroke="#eee5dc"/>
+  <text x="710" y="432" font-size="12.5" fill="#333" font-family="ui-monospace, monospace">affected_orders</text>
+  <text x="877" y="432" font-size="11.5" fill="#4a8055">graded</text>
+  <text x="710" y="454" font-size="12.5" fill="#333" font-family="ui-monospace, monospace">severity</text>
+  <text x="877" y="454" font-size="11.5" fill="#4a8055">graded</text>
+  <text x="710" y="476" font-size="12.5" fill="#333" font-family="ui-monospace, monospace">revenue_at_risk_usd</text>
+  <text x="877" y="476" font-size="11.5" fill="#4a8055">graded</text>
+  <text x="710" y="498" font-size="12.5" fill="#333" font-family="ui-monospace, monospace">reasoning</text>
+  <text x="862" y="498" font-size="11.5" fill="#b4503f">not graded</text>
+
+  <path d="M686,452 L638,452" fill="none" stroke="#7d6b5d" stroke-width="2" marker-end="url(#a)"/>
+
+  <!-- ================= SCORING ================= -->
+  <rect x="350" y="376" width="280" height="152" rx="7" fill="#f6f1eb" stroke="#7d6b5d" stroke-width="2"/>
+  <text x="370" y="400" font-size="15" font-weight="700" fill="#1a1a1a" font-family="ui-monospace, monospace">graders.py</text>
+  <text x="370" y="420" font-size="12" fill="#6b6058">model_response vs golden_answer</text>
+  <text x="370" y="446" font-size="12.5" fill="#333">order IDs</text>
+  <text x="466" y="446" font-size="12" fill="#8a7a6d">precision · recall · F1</text>
+  <text x="370" y="468" font-size="12.5" fill="#333">order IDs</text>
+  <text x="466" y="468" font-size="12" fill="#8a7a6d">hallucination check</text>
+  <text x="370" y="490" font-size="12.5" fill="#333">revenue</text>
+  <text x="466" y="490" font-size="12" fill="#8a7a6d">within 5% tolerance</text>
+  <text x="370" y="512" font-size="12.5" fill="#333">severity</text>
+  <text x="466" y="512" font-size="12" fill="#8a7a6d">exact match</text>
+
+  <path d="M346,452 L298,452" fill="none" stroke="#7d6b5d" stroke-width="2" marker-end="url(#a)"/>
+
+  <rect x="50" y="412" width="240" height="80" rx="7" fill="#fdfaf7" stroke="#d4a27f" stroke-width="2"/>
+  <text x="170" y="444" font-size="14.5" font-weight="700" fill="#1a1a1a" text-anchor="middle" font-family="ui-monospace, monospace">scorecard.json</text>
+  <text x="170" y="468" font-size="12.5" fill="#6b6058" text-anchor="middle">+ per-model cost &amp; latency</text>
+
+  <!-- ============ GOLDEN ANSWER BYPASS ============ -->
+  <path d="M90,176 L26,176 L26,604 L490,604 L490,532" fill="none" stroke="#a89c91" stroke-width="2" stroke-dasharray="7,5" marker-end="url(#ad)"/>
+  <text x="516" y="609" font-size="12.5" font-weight="700" fill="#7d6b5d">golden_answer routes around the model — it is only ever used to score the answer</text>
+</svg>
