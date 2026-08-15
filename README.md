@@ -22,10 +22,13 @@ This harness — code, fixtures, and documentation — was built with
 
 ## Quickstart
 
-Requires Python 3.14 and an Anthropic API key.
+Requires Python 3.11+ (developed on 3.14) and an Anthropic API key. Nothing in the harness
+code needs more than 3.10, but `pandas` 3.x declares `Requires-Python >= 3.11`, so that is the
+practical floor for the install command below.
 
 ```bash
-git clone <this-repo> && cd eval-harness
+git clone https://github.com/dale-rossi/supply-chain-eval-harness
+cd supply-chain-eval-harness
 python3 -m venv venv && source venv/bin/activate
 pip install anthropic pandas python-dotenv
 ```
